@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroCard from '@components/blocks/HeroCard.astro';
+import FeatureGrid from '@components/blocks/FeatureGrid.astro';
+import ContactForm from '@components/blocks/ContactForm.astro';
+import Container from '@components/ui/Container.astro';
+import { getEntry, render } from 'astro:content';
+
+const page = await getEntry('pages', 'home');
+if (!page) throw new Error('Missing pages/home entry');
+
+const { title, hero, intro, features, seo } = page.data;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
+  {hero && (
+    <HeroCard title={title} intro={intro} hero={hero} />
+  )}
+
+  <Container size="lg" class="py-8 prose prose-lg max-w-none">
+    <Content />
+  </Container>
+
+  <section class="py-12 sm:py-20 bg-surface-alt">
+    <Container size="xl">
+      <FeatureGrid features={features} columns={2} />
+    </Container>
+  </section>
+
+  <ContactForm />
+</BaseLayout>

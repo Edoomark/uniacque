@@ -1,0 +1,46 @@
+---
+import { streamEmbedUrl, streamPoster } from '@lib/stream';
+
+interface Props {
+  uid: string;
+  alt: string;
+  class?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  poster?: string;
+}
+
+const {
+  uid,
+  alt,
+  class: className = '',
+  autoplay = false,
+  loop = false,
+  muted = false,
+  controls = true,
+  poster,
+} = Astro.props;
+
+const params = new URLSearchParams();
+if (autoplay) params.set('autoplay', 'true');
+if (loop) params.set('loop', 'true');
+if (muted) params.set('muted', 'true');
+if (!controls) params.set('controls', 'false');
+if (poster) params.set('poster', poster);
+
+const src = `${streamEmbedUrl(uid)}?${params.toString()}`;
+const posterUrl = poster ?? streamPoster(uid);
+---
+
+<div class={`relative aspect-video overflow-hidden ${className}`} data-stream-uid={uid}>
+  <iframe
+    src={src}
+    title={alt}
+    loading="lazy"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen
+    class="absolute inset-0 h-full w-full border-0"
+  ></iframe>
+</div>

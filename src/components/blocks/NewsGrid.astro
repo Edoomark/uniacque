@@ -1,0 +1,47 @@
+---
+import R2Image from '@components/media/R2Image.astro';
+
+interface NewsItem {
+  slug: string;
+  title: string;
+  date: Date;
+  excerpt: string;
+  cover: { src: string; alt: string };
+  tags?: string[];
+}
+
+interface Props {
+  items: NewsItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+const fmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+{items.length === 0 ? (
+  <p class="text-ink-soft">Nessuna news pubblicata al momento.</p>
+) : (
+  <div class={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${className}`}>
+    {items.map((item) => (
+      <a
+        href={`/news/${item.slug}`}
+        class="group flex flex-col overflow-hidden rounded-card bg-white shadow-sm transition-shadow hover:shadow-md"
+      >
+        <div class="aspect-[16/10] overflow-hidden bg-surface-alt">
+          <R2Image
+            src={item.cover.src}
+            alt={item.cover.alt}
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div class="flex flex-1 flex-col gap-3 p-6">
+          <time class="text-sm text-ink-soft">{fmt.format(item.date)}</time>
+          <h3 class="text-xl font-bold text-primary">{item.title}</h3>
+          <p class="line-clamp-3 text-sm text-ink-soft">{item.excerpt}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+)}

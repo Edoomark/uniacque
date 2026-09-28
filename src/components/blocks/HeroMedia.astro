@@ -1,0 +1,42 @@
+---
+import R2Image from '@components/media/R2Image.astro';
+import Video from '@components/media/Video.astro';
+
+interface HeroImage {
+  type: 'image';
+  image: { src: string; alt: string; caption?: string };
+}
+interface HeroVideo {
+  type: 'video';
+  video: { kind: 'stream' | 'r2' | 'youtube' | 'bunny'; src: string; poster?: string; alt: string };
+}
+
+interface Props {
+  hero: HeroImage | HeroVideo;
+  class?: string;
+}
+
+const { hero, class: className = '' } = Astro.props;
+---
+
+<div class={`relative w-full overflow-hidden rounded-hero bg-primary ${className}`}>
+  {hero.type === 'image' && (
+    <R2Image
+      src={hero.image.src}
+      alt={hero.image.alt}
+      loading="eager"
+      class="h-full w-full object-cover"
+    />
+  )}
+  {hero.type === 'video' && (
+    <Video
+      video={hero.video}
+      class="h-full w-full"
+      autoplay
+      muted
+      loop
+      controls={false}
+    />
+  )}
+  <slot />
+</div>

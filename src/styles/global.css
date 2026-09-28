@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — valori stimati da screenshot, non brand ufficiali.
+  Da riallineare con la brand guideline Uniacque.
+*/
+@theme {
+  --color-primary: #1B3A5C;
+  --color-primary-dark: #142B44;
+  --color-primary-light: #2C5A87;
+
+  --color-accent: #A9D9EC;
+  --color-accent-dark: #7CC0DA;
+
+  --color-warm: #F28C28;
+  --color-warm-dark: #D97516;
+
+  --color-surface: #FAFAF7;
+  --color-surface-alt: #F1F2EE;
+
+  --color-ink: #1A1A1A;
+  --color-ink-soft: #4A4A4A;
+
+  --font-display: "Fredoka", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-box: 1rem;
+  --radius-card: 1.5rem;
+  --radius-hero: 2rem;
+}
+
+/*
+  Self-host dei font (GDPR-safe, no Google Fonts).
+  Metti i .woff2 in /public/fonts/ prima del build.
+*/
+@font-face {
+  font-family: "Fredoka";
+  src: url("/fonts/Fredoka-Variable.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}

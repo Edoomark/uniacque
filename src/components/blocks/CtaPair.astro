@@ -1,0 +1,25 @@
+---
+import Button from '@components/ui/Button.astro';
+import { auth } from '@data/site';
+
+interface Props {
+  loginLabel?: string;
+  registerLabel?: string;
+  class?: string;
+}
+
+const {
+  loginLabel = 'Accedi',
+  registerLabel = 'Registrati',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`flex flex-wrap gap-3 ${className}`}>
+  <Button href={auth.login} variant="primary" external>
+    {loginLabel}
+  </Button>
+  <Button href={auth.register} variant="secondary" external>
+    {registerLabel}
+  </Button>
+</div>

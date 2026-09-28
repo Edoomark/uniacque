@@ -1,0 +1,42 @@
+---
+import { r2Url } from '@lib/r2';
+
+interface Props {
+  src: string;
+  poster?: string;
+  alt: string;
+  class?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  playsinline?: boolean;
+}
+
+const {
+  src,
+  poster,
+  alt,
+  class: className = '',
+  autoplay = false,
+  loop = false,
+  muted = true,
+  controls = true,
+  playsinline = true,
+} = Astro.props;
+
+const videoUrl = r2Url(src);
+const posterUrl = poster ? r2Url(poster) : undefined;
+---
+
+<video
+  class={className}
+  src={videoUrl}
+  poster={posterUrl}
+  aria-label={alt}
+  autoplay={autoplay}
+  loop={loop}
+  muted={muted}
+  controls={controls}
+  playsinline={playsinline}
+></video>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroCard from '@components/blocks/HeroCard.astro';
+import FeatureGrid from '@components/blocks/FeatureGrid.astro';
+import Container from '@components/ui/Container.astro';
+import { getEntry, getCollection, render } from 'astro:content';
+
+const page = await getEntry('pages', 'educational');
+if (!page) throw new Error('Missing pages/educational entry');
+
+const { title, hero, intro, seo } = page.data;
+const { Content } = await render(page);
+
+const programs = (await getCollection('programs')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const features = programs.map((p) => ({
+  title: p.data.title,
+  description: p.data.summary,
+  image:
+    p.data.hero.type === 'image'
+      ? p.data.hero.image
+      : { src: p.data.hero.video.poster ?? '', alt: p.data.hero.video.alt },
+  cta: { label: 'Scopri di più', href: `/educational/${p.id}`, variant: 'primary' as const },
+}));
+---
+
+<BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
+  {hero && <HeroCard title={title} intro={intro} hero={hero} />}
+
+  <Container size="lg" class="py-8 prose prose-lg max-w-none">
+    <Content />
+  </Container>
+
+  <section class="py-12 sm:py-20 bg-surface-alt">
+    <Container size="xl">
+      <FeatureGrid features={features} columns={2} />
+    </Container>
+  </section>
+</BaseLayout>

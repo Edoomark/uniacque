@@ -1,0 +1,34 @@
+---
+import ArticleLayout from '@layouts/ArticleLayout.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const articles = await getCollection('news', ({ data }) => !data.draft);
+  return articles.map((article) => {
+    const related = articles
+      .filter((a) => a.id !== article.id)
+      .filter((a) => article.data.related.includes(a.id) || a.data.tags.some((t) => article.data.tags.includes(t)))
+      .slice(0, 3)
+      .map((a) => ({
+        slug: a.id,
+        title: a.data.title,
+        date: a.data.date,
+        excerpt: a.data.excerpt,
+        cover: a.data.cover,
+      }));
+
+    return {
+      params: { slug: article.id },
+      props: { article, related },
+    };
+  });
+};
+
+const { article, related } = Astro.props;
+const { Content } = await render(article);
+---
+
+<ArticleLayout article={article} related={related}>
+  <Content />
+</ArticleLayout>

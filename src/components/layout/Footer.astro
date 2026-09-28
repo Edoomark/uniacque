@@ -1,0 +1,52 @@
+---
+import Container from '@components/ui/Container.astro';
+import { site } from '@data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-primary-dark text-white">
+  <Container size="xl" class="py-12">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="font-display text-xl font-bold">{site.shortName}</p>
+        <p class="mt-2 text-sm opacity-80">{site.description}</p>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold uppercase tracking-wide opacity-70">Contatti</h4>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href={`mailto:${site.contactEmail}`} class="hover:underline">
+              {site.contactEmail}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold uppercase tracking-wide opacity-70">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href={site.privacyUrl} class="hover:underline">Privacy Policy</a></li>
+          <li><a href={site.cookieUrl} class="hover:underline">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-3 text-sm font-semibold uppercase tracking-wide opacity-70">Partner</h4>
+        <a
+          href={site.partner.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block text-sm hover:underline"
+        >
+          {site.partner.name}
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-10 border-t border-white/10 pt-6 text-xs opacity-70">
+      © {year} Uniacque S.p.A. — Tutti i diritti riservati.
+    </div>
+  </Container>
+</footer>

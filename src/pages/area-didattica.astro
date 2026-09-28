@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import CtaPair from '@components/blocks/CtaPair.astro';
+import { getEntry, render } from 'astro:content';
+
+const page = await getEntry('pages', 'area-didattica');
+if (!page) throw new Error('Missing pages/area-didattica entry');
+
+const { title, seo } = page.data;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
+  <section class="bg-primary py-16 sm:py-24 text-white">
+    <Container size="md">
+      <h1 class="text-4xl sm:text-5xl font-bold">{title}</h1>
+      <p class="mt-4 text-lg opacity-90">
+        Accedi all'area riservata per prenotare le attività, scaricare i materiali
+        didattici e vedere i video prodotti nell'ambito della Formazione Scuola-Lavoro.
+      </p>
+      <CtaPair class="mt-8" />
+    </Container>
+  </section>
+
+  <Container size="md" class="py-12 sm:py-16 prose prose-lg max-w-none">
+    <Content />
+  </Container>
+</BaseLayout>

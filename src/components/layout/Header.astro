@@ -1,0 +1,64 @@
+---
+import Container from '@components/ui/Container.astro';
+import { site, nav } from '@data/site';
+---
+
+<header class="sticky top-0 z-40 border-b border-surface-alt bg-white/90 backdrop-blur">
+  <Container size="xl" class="flex items-center justify-between py-4">
+    <a href="/" class="flex items-center gap-2 font-display text-xl font-bold text-primary">
+      <span>{site.shortName}</span>
+    </a>
+
+    <nav aria-label="Navigazione principale" class="hidden md:block">
+      <ul class="flex items-center gap-6">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-sm font-medium text-ink hover:text-primary transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      class="md:hidden rounded-full p-2 text-primary hover:bg-surface-alt"
+      aria-label="Apri menu"
+      data-mobile-menu-toggle
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+      </svg>
+    </button>
+  </Container>
+
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-surface-alt bg-white"
+    aria-label="Navigazione mobile"
+  >
+    <ul class="flex flex-col gap-1 p-4">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block rounded-box px-4 py-3 text-base font-medium text-ink hover:bg-surface-alt hover:text-primary"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector('[data-mobile-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

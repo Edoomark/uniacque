@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+  tone?: 'white' | 'accent' | 'surface';
+  padding?: 'sm' | 'md' | 'lg';
+}
+
+const { class: className = '', tone = 'white', padding = 'md' } = Astro.props;
+
+const tones = {
+  white: 'bg-white',
+  accent: 'bg-accent',
+  surface: 'bg-surface-alt',
+};
+
+const paddings = {
+  sm: 'p-4',
+  md: 'p-6 sm:p-8',
+  lg: 'p-8 sm:p-10',
+};
+---
+
+<div class={`rounded-card shadow-sm ${tones[tone]} ${paddings[padding]} ${className}`}>
+  <slot />
+</div>

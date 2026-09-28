@@ -1,0 +1,34 @@
+---
+import Video from '@components/media/Video.astro';
+
+interface VideoItem {
+  kind: 'stream' | 'r2' | 'youtube' | 'bunny';
+  src: string;
+  poster?: string;
+  alt: string;
+}
+
+interface Props {
+  videos: VideoItem[];
+  columns?: 2 | 3;
+  class?: string;
+}
+
+const { videos, columns = 2, class: className = '' } = Astro.props;
+
+const gridCols = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+};
+---
+
+{videos.length > 0 && (
+  <div class={`grid gap-6 ${gridCols[columns]} ${className}`}>
+    {videos.map((v) => (
+      <div>
+        <Video video={v} class="rounded-box" />
+        <p class="mt-2 text-sm text-ink-soft">{v.alt}</p>
+      </div>
+    ))}
+  </div>
+)}

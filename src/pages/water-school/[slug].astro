@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroCard from '@components/blocks/HeroCard.astro';
+import Gallery from '@components/blocks/Gallery.astro';
+import Container from '@components/ui/Container.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const editions = await getCollection('waterEditions');
+  return editions.map((edition) => ({
+    params: { slug: edition.id },
+    props: { edition },
+  }));
+};
+
+const { edition } = Astro.props;
+const { title, hero, weeks, themes, format, jury, prize, gallery, note, seo } = edition.data;
+const { Content } = await render(edition);
+---
+
+<BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
+  <HeroCard title={title} eyebrow="Water School" hero={hero} />
+
+  <Container size="lg" class="py-8 prose prose-lg max-w-none">
+    <Content />
+  </Container>
+
+  <Container size="lg" class="pb-12">
+    <dl class="grid gap-4 sm:grid-cols-2">
+      {weeks && (
+        <div class="rounded-box bg-accent p-6 text-primary">
+          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Durata</dt>
+          <dd class="mt-2 text-lg font-medium">{weeks} settimane</dd>
+        </div>
+      )}
+      {themes.length > 0 && (
+        <div class="rounded-box bg-accent p-6 text-primary">
+          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Temi</dt>
+          <dd class="mt-2 text-lg font-medium">{themes.join(' · ')}</dd>
+        </div>
+      )}
+      {format.length > 0 && (
+        <div class="rounded-box bg-accent p-6 text-primary">
+          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Format</dt>
+          <dd class="mt-2 text-lg font-medium">{format.join(' · ')}</dd>
+        </div>
+      )}
+      {jury && (
+        <div class="rounded-box bg-accent p-6 text-primary">
+          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Giuria</dt>
+          <dd class="mt-2 text-lg font-medium">{jury}</dd>
+        </div>
+      )}
+      {prize && (
+        <div class="rounded-box bg-accent p-6 text-primary">
+          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Premio</dt>
+          <dd class="mt-2 text-lg font-medium">{prize}</dd>
+        </div>
+      )}
+    </dl>
+  </Container>
+
+  {note && (
+    <Container size="lg" class="pb-8">
+      <div class="rounded-box border-l-4 border-warm bg-warm/10 p-4 text-ink-soft">{note}</div>
+    </Container>
+  )}
+
+  {gallery.length > 0 && (
+    <section class="py-12 sm:py-16 bg-surface-alt">
+      <Container size="xl">
+        <h2 class="mb-8 text-2xl sm:text-3xl font-bold text-primary">Galleria</h2>
+        <Gallery images={gallery} columns={3} />
+      </Container>
+    </section>
+  )}
+</BaseLayout>

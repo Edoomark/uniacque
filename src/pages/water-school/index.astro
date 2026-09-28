@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroCard from '@components/blocks/HeroCard.astro';
+import Button from '@components/ui/Button.astro';
+import Container from '@components/ui/Container.astro';
+import { getEntry, getCollection, render } from 'astro:content';
+
+const page = await getEntry('pages', 'water-school');
+if (!page) throw new Error('Missing pages/water-school entry');
+
+const { title, hero, intro, seo } = page.data;
+const { Content } = await render(page);
+
+const editions = (await getCollection('waterEditions')).sort(
+  (a, b) => b.data.year - a.data.year
+);
+---
+
+<BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
+  {hero && <HeroCard title={title} intro={intro} hero={hero} />}
+
+  <Container size="lg" class="py-8 prose prose-lg max-w-none">
+    <Content />
+  </Container>
+
+  {editions.length > 0 && (
+    <section class="py-12 sm:py-20 bg-surface-alt">
+      <Container size="lg">
+        <h2 class="mb-8 text-3xl font-bold text-primary">Edizioni</h2>
+        <div class="flex flex-wrap gap-4">
+          {editions.map((e) => (
+            <Button href={`/water-school/${e.id}`} variant="primary">
+              {e.data.title}
+            </Button>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+</BaseLayout>

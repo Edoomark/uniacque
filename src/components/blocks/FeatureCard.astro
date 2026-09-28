@@ -1,0 +1,30 @@
+---
+import R2Image from '@components/media/R2Image.astro';
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image: { src: string; alt: string };
+  cta: { label: string; href: string; variant?: 'primary' | 'secondary' | 'ghost' };
+}
+
+const { title, description, image, cta } = Astro.props;
+---
+
+<article class="group flex flex-col overflow-hidden rounded-card bg-white shadow-sm transition-shadow hover:shadow-md">
+  <div class="aspect-[16/10] overflow-hidden bg-surface-alt">
+    <R2Image
+      src={image.src}
+      alt={image.alt}
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  </div>
+  <div class="flex flex-1 flex-col gap-4 p-6">
+    <h3 class="text-2xl font-bold text-primary">{title}</h3>
+    <p class="flex-1 text-ink-soft">{description}</p>
+    <Button href={cta.href} variant={cta.variant ?? 'primary'} size="md" class="self-start">
+      {cta.label}
+    </Button>
+  </div>
+</article>

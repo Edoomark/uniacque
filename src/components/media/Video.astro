@@ -1,0 +1,74 @@
+---
+import R2Video from './R2Video.astro';
+import StreamPlayer from './StreamPlayer.astro';
+
+interface VideoData {
+  kind: 'stream' | 'r2' | 'youtube' | 'bunny';
+  src: string;
+  poster?: string;
+  alt: string;
+}
+
+interface Props {
+  video: VideoData;
+  class?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+const { video, class: className = '', autoplay, loop, muted, controls } = Astro.props;
+---
+
+{video.kind === 'stream' && (
+  <StreamPlayer
+    uid={video.src}
+    alt={video.alt}
+    poster={video.poster}
+    class={className}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    controls={controls}
+  />
+)}
+
+{video.kind === 'r2' && (
+  <R2Video
+    src={video.src}
+    poster={video.poster}
+    alt={video.alt}
+    class={className}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    controls={controls}
+  />
+)}
+
+{video.kind === 'youtube' && (
+  <div class={`relative aspect-video overflow-hidden ${className}`}>
+    <iframe
+      src={`https://www.youtube-nocookie.com/embed/${video.src}`}
+      title={video.alt}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="absolute inset-0 h-full w-full border-0"
+    ></iframe>
+  </div>
+)}
+
+{video.kind === 'bunny' && (
+  <div class={`relative aspect-video overflow-hidden ${className}`}>
+    <iframe
+      src={`https://iframe.mediadelivery.net/embed/${video.src}`}
+      title={video.alt}
+      loading="lazy"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+      allowfullscreen
+      class="absolute inset-0 h-full w-full border-0"
+    ></iframe>
+  </div>
+)}

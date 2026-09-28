@@ -1,0 +1,28 @@
+---
+import NewsGrid from './NewsGrid.astro';
+import Container from '@components/ui/Container.astro';
+
+interface NewsItem {
+  slug: string;
+  title: string;
+  date: Date;
+  excerpt: string;
+  cover: { src: string; alt: string };
+}
+
+interface Props {
+  items: NewsItem[];
+  title?: string;
+}
+
+const { items, title = 'Articoli correlati' } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="bg-surface-alt py-16 sm:py-20">
+    <Container size="xl">
+      <h2 class="mb-8 text-2xl font-bold text-primary sm:text-3xl">{title}</h2>
+      <NewsGrid items={items} />
+    </Container>
+  </section>
+)}

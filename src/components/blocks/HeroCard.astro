@@ -1,0 +1,30 @@
+---
+import Container from '@components/ui/Container.astro';
+import HeroMedia from './HeroMedia.astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  intro?: string;
+  hero: Parameters<typeof HeroMedia>[0]['hero'];
+}
+
+const { title, eyebrow, intro, hero } = Astro.props;
+---
+
+<section class="relative bg-primary pt-8 pb-24 sm:pt-12 sm:pb-32">
+  <Container size="xl">
+    <HeroMedia hero={hero} class="aspect-[16/8] sm:aspect-[16/7]" />
+  </Container>
+
+  <Container size="lg" class="relative -mt-20 sm:-mt-28">
+    <div class="rounded-card bg-white p-6 sm:p-10 shadow-lg">
+      {eyebrow && (
+        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-warm">{eyebrow}</p>
+      )}
+      <h1 class="text-3xl sm:text-5xl font-bold text-primary">{title}</h1>
+      {intro && <p class="mt-4 text-lg text-ink-soft">{intro}</p>}
+      <slot />
+    </div>
+  </Container>
+</section>
