@@ -9,6 +9,9 @@ hero:
     src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/hero.mp4"
     poster: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/hero-poster.jpg"
     alt: "Video del laboratorio Missione Comune"
+cardImage:
+  src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/card.jpg"
+  alt: "Missione Comune — anteprima laboratorio"
 intro: >
   Un laboratorio pensato per le secondarie di primo grado che trasforma la
   classe nella "centrale operativa" di un comune fittizio, e la fa lavorare
@@ -28,6 +31,14 @@ gallery:
       alt: "Ragazzi durante il laboratorio Missione Comune"
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-02.jpg"
       alt: "Sfida di progettazione del sistema idrico"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-03.jpg"
+      alt: "Studenti al lavoro durante Missione Comune"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-04.jpg"
+      alt: "Attività di gruppo del laboratorio"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-05.jpg"
+      alt: "Classe durante la sfida della gestione idrica"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-06.jpg"
+      alt: "Momento conclusivo del laboratorio"
 contactEmail: educational@uniacque.bg.it
 seo:
   description: Missione Comune — laboratorio didattico Uniacque per le secondarie di primo grado, in collaborazione con scuole e comuni.

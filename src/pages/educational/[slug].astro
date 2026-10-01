@@ -1,6 +1,6 @@
 ---
 import ProgramLayout from '@layouts/ProgramLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-const { program } = Astro.props;
+const { program } = Astro.props as { program: CollectionEntry<'programs'> };
 const { Content } = await render(program);
 ---
 

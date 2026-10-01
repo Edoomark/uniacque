@@ -5,7 +5,8 @@ interface Props {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-const { as: Tag = 'div', class: className = '', size = 'lg' } = Astro.props;
+const { as = 'div', class: className = '', size = 'lg' } = Astro.props;
+const Tag = as as any;
 
 const sizes = {
   sm: 'max-w-3xl',

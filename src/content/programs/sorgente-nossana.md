@@ -7,6 +7,9 @@ hero:
   image:
     src: Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/hero.jpg
     alt: La sorgente Nossana a Ponte Nossa
+cardImage:
+  src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/card.jpg"
+  alt: "Sorgente Nossana — anteprima visita didattica"
 intro: >
   Una mattinata alla scoperta della sorgente di Ponte Nossa, punto di partenza
   del ciclo dell'acqua Uniacque, e dell'impianto che rende l'acqua potabile.
@@ -32,6 +35,12 @@ gallery:
       alt: "Studenti alla sorgente Nossana"
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-02.jpg"
       alt: "Visita all'impianto di potabilizzazione"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-03.jpg"
+      alt: "Visita didattica alla sorgente Nossana"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-04.jpg"
+      alt: "Studenti in visita all'impianto di potabilizzazione"
+    - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-05.jpg"
+      alt: "Momento della visita alla sorgente"
 note: "La visita può essere abbinata al Maglio Museo di Ponte Nossa."
 seo:
   description: Visita didattica alla sorgente Nossana e all'impianto di potabilizzazione di Uniacque, per le scuole di Bergamo.

@@ -5,6 +5,7 @@ interface Props {
   size?: 'sm' | 'md' | 'lg';
   class?: string;
   external?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   size = 'md',
   class: className = '',
   external = false,
+  type,
 } = Astro.props;
 
 const base =
@@ -35,6 +37,6 @@ const Tag = href ? 'a' : 'button';
 const extAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 
-<Tag class={classes} href={href} {...extAttrs}>
+<Tag class={classes} href={href} type={href ? undefined : type ?? 'button'} {...extAttrs}>
   <slot />
 </Tag>

@@ -3,7 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
 import Gallery from '@components/blocks/Gallery.astro';
 import Container from '@components/ui/Container.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-const { edition } = Astro.props;
+const { edition } = Astro.props as { edition: CollectionEntry<'waterEditions'> };
 const { title, hero, weeks, themes, format, jury, prize, gallery, note, seo } = edition.data;
 const { Content } = await render(edition);
 ---

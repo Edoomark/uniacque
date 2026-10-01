@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { id = 'contatti' } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 ---
 
 <section id={id} class="bg-primary py-16 sm:py-24 text-white">
@@ -20,10 +21,11 @@ const { id = 'contatti' } = Astro.props;
     </div>
 
     <form
+      data-contact-form
       class="mt-10 grid gap-4 rounded-card bg-white p-6 sm:p-10 text-ink shadow-lg"
-      action={`mailto:${site.contactEmail}`}
+      action="/api/contact"
       method="post"
-      enctype="text/plain"
+      novalidate
     >
       <div class="grid gap-4 sm:grid-cols-2">
         <label class="block">
@@ -32,6 +34,7 @@ const { id = 'contatti' } = Astro.props;
             type="text"
             name="name"
             required
+            autocomplete="name"
             class="mt-1 w-full rounded-box border border-surface-alt bg-surface px-4 py-3 focus:border-primary focus:outline-none"
           />
         </label>
@@ -41,6 +44,7 @@ const { id = 'contatti' } = Astro.props;
             type="email"
             name="email"
             required
+            autocomplete="email"
             class="mt-1 w-full rounded-box border border-surface-alt bg-surface px-4 py-3 focus:border-primary focus:outline-none"
           />
         </label>
@@ -50,6 +54,7 @@ const { id = 'contatti' } = Astro.props;
         <input
           type="text"
           name="school"
+          autocomplete="organization"
           class="mt-1 w-full rounded-box border border-surface-alt bg-surface px-4 py-3 focus:border-primary focus:outline-none"
         />
       </label>
@@ -62,12 +67,76 @@ const { id = 'contatti' } = Astro.props;
           class="mt-1 w-full rounded-box border border-surface-alt bg-surface px-4 py-3 focus:border-primary focus:outline-none"
         ></textarea>
       </label>
+
+      <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+
       <div class="flex items-center justify-between gap-4">
         <p class="text-xs text-ink-soft">
           Inviando accetti la <a href={site.privacyUrl} class="underline">privacy policy</a>.
         </p>
-        <Button variant="primary" size="md">Invia</Button>
+        <Button variant="primary" size="md" type="submit">Invia</Button>
       </div>
+
+      <p
+        data-contact-status
+        class="hidden rounded-box px-4 py-3 text-sm"
+        role="status"
+        aria-live="polite"
+      ></p>
     </form>
   </Container>
 </section>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = document.querySelector<HTMLElement>('[data-contact-status]');
+
+  function setStatus(kind: 'ok' | 'err', msg: string) {
+    if (!status) return;
+    status.textContent = msg;
+    status.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+    if (kind === 'ok') status.classList.add('bg-green-100', 'text-green-800');
+    else status.classList.add('bg-red-100', 'text-red-800');
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { accept: 'application/json' },
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (res.ok && data.ok) {
+        form.reset();
+        // @ts-expect-error Turnstile injects a global reset helper
+        window.turnstile?.reset();
+        setStatus('ok', 'Messaggio inviato. Ti risponderemo al più presto.');
+      } else {
+        const map: Record<string, string> = {
+          'missing-fields': 'Compila tutti i campi obbligatori.',
+          'invalid-email': 'Indirizzo email non valido.',
+          'missing-captcha': 'Completa la verifica antispam.',
+          'captcha-failed': 'Verifica antispam non superata, riprova.',
+          'send-failed': 'Invio non riuscito, riprova tra qualche minuto.',
+        };
+        setStatus('err', map[data.error ?? ''] ?? 'Errore imprevisto, riprova.');
+      }
+    } catch {
+      setStatus('err', 'Errore di rete, controlla la connessione e riprova.');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+</script>

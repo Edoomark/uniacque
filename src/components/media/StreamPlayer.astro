@@ -1,5 +1,5 @@
 ---
-import { streamEmbedUrl, streamPoster } from '@lib/stream';
+import { streamEmbedUrl } from '@lib/stream';
 
 interface Props {
   uid: string;
@@ -31,7 +31,6 @@ if (!controls) params.set('controls', 'false');
 if (poster) params.set('poster', poster);
 
 const src = `${streamEmbedUrl(uid)}?${params.toString()}`;
-const posterUrl = poster ?? streamPoster(uid);
 ---
 
 <div class={`relative aspect-video overflow-hidden ${className}`} data-stream-uid={uid}>

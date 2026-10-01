@@ -47,6 +47,7 @@ const programs = defineCollection({
     order: z.number(),
     summary: z.string(),
     hero,
+    cardImage: mediaAsset.optional(),
     intro: z.string().optional(),
     infoBoxes: z.array(infoBox).default([]),
     ctas: z.array(cta).default([]),

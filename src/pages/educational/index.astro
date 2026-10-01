@@ -19,9 +19,10 @@ const features = programs.map((p) => ({
   title: p.data.title,
   description: p.data.summary,
   image:
-    p.data.hero.type === 'image'
+    p.data.cardImage ??
+    (p.data.hero.type === 'image'
       ? p.data.hero.image
-      : { src: p.data.hero.video.poster ?? '', alt: p.data.hero.video.alt },
+      : { src: p.data.hero.video.poster ?? '', alt: p.data.hero.video.alt }),
   cta: { label: 'Scopri di più', href: `/educational/${p.id}`, variant: 'primary' as const },
 }));
 ---

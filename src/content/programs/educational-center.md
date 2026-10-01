@@ -7,6 +7,9 @@ hero:
   image:
     src: "Sezione Educational/Educational Center/hero.jpg"
     alt: "L'Educational Center di Uniacque a Cologno al Serio"
+cardImage:
+  src: "Sezione Educational/Educational Center/card.jpg"
+  alt: "Educational Center Uniacque — anteprima"
 intro: >
   Uno spazio esperienziale a Cologno al Serio che racconta il viaggio
   dell'acqua dal rubinetto al ritorno in ambiente, con un plastico

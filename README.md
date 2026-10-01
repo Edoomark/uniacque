@@ -15,9 +15,15 @@ visite guidate, formazione scuola-lavoro, area didattica e news.
 ## Setup locale
 
 ```bash
-cp .env.example .env      # imposta PUBLIC_R2_BASE_URL, PUBLIC_STREAM_SUBDOMAIN, PUBLIC_AUTH_*
+cp .env.example .env      # imposta PUBLIC_R2_BASE_URL, PUBLIC_STREAM_SUBDOMAIN, PUBLIC_AUTH_*, PUBLIC_TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, CONTACT_*
 npm install
 npm run dev
+```
+
+Per testare il form contatto in locale serve `wrangler pages dev`:
+
+```bash
+npx wrangler pages dev -- npm run dev
 ```
 
 ## Struttura
@@ -32,7 +38,8 @@ npm run dev
 - `src/pages/` — routing Astro (index, educational, water-school, area-didattica, news)
 - `src/lib/` — helper `r2Url()` e `streamEmbedUrl()`
 - `src/data/site.ts` — navigazione, contatti, partner
-- `public/fonts/` — self-hosting Fredoka + Inter (aggiungere `.woff2`)
+- `public/fonts/` — self-hosting Fredoka + Inter (variable, latin, da Fontsource)
+- `functions/api/contact.ts` — Cloudflare Pages Function: verifica Turnstile + invio email via Resend
 
 ## Gestione media
 
@@ -56,4 +63,8 @@ supporta anche `r2`, `youtube`, `bunny` se si volesse cambiare provider.
 1. Push del repo su GitHub
 2. Su Cloudflare Pages: connetti repo, framework preset **Astro**
 3. Build command: `npm run build`, output: `dist`
-4. Variabili d'ambiente: aggiungi tutte le `PUBLIC_*` da `.env.example`
+4. Variabili d'ambiente (Production + Preview):
+   - `PUBLIC_*` da `.env.example` (client-side, embedded nel build)
+   - `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (server-side, solo Pages Functions)
+5. Turnstile: crea widget su Cloudflare dashboard → Turnstile e associalo al dominio del sito
+6. Resend: verifica il dominio mittente (SPF/DKIM) per abilitare `CONTACT_FROM_EMAIL`
