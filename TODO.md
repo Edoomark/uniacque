@@ -8,15 +8,29 @@ Tutto quello che dipende da record DNS del dominio Uniacque è rimandato.
 
 ## 🔴 Blocker esterni (in attesa di terzi)
 
-- [ ] **DNS `uniacque.bg.it`**: richiedere all'IT Uniacque una di queste tre
-      soluzioni, in ordine di preferenza:
-  1. delega del DNS a Cloudflare (nameserver)
-  2. accesso in scrittura al pannello DNS attuale
-  3. su richiesta puntuale, l'IT aggiunge i record specifici (Resend
-     dominio, CNAME R2, CNAME Cloudflare Pages)
+- [ ] **DNS `uniacque.bg.it`**: contatto tecnico trovato il 2026-10-01 —
+      Alex Perez (`aperez@imteam.it`, Yamme Srl / Gruppo IMteam), introdotto
+      da Antonio Sarti Deponti (Uniacque). In attesa di risposta a mail con
+      proposta tecnica + richiesta dati.
+      Opzione proposta a Yamme (nuova, preferita):
+  0. **Subdomain delegation**: 2 record NS su `scuole.uniacque.bg.it` →
+     nameserver Cloudflare. Loro intervengono una sola volta, noi
+     gestiamo in autonomia tutto sotto `scuole.*` (sito, CDN su
+     `cdn.scuole.*`, email transazionale `no-reply@scuole.*`).
+     Il resto di `uniacque.bg.it` (mail, PEC, servizi interni) resta
+     intoccato sui loro NS.
+  Piani di fallback (in ordine):
+  1. delega del DNS dell'intero dominio a Cloudflare (improbabile)
+  2. accesso in scrittura al loro pannello DNS (improbabile per policy)
+  3. richiesta puntuale: loro aggiungono i singoli record di volta in
+     volta (Resend, CNAME Pages, CNAME R2)
+  Dati chiesti nella mail: registrar del dominio, provider DNS attuale,
+  hosting attuale di `www.educational.uniacque.bg.it`, record
+  SPF/DKIM/DMARC già presenti, conferma del subdomain finale
+  (`scuole.*` vs mantenere `educational.*`).
   Blocca:
   - Verifica dominio Resend per invio email di produzione
-  - Custom domain R2 (`cdn.uniacque.bg.it`) — sostituibile per ora con URL `*.r2.dev`
+  - Custom domain R2 (`cdn.uniacque.bg.it` o `cdn.scuole.*`) — sostituibile per ora con URL `*.r2.dev`
   - Custom domain Cloudflare Pages (`scuole.uniacque.bg.it`) — sostituibile per ora con URL `*.pages.dev`
 - [ ] **Testi finali approvati**: confermare che i draft in `src/content/**/*.md`
       siano definitivi, oppure ricevere i testi ufficiali
@@ -60,7 +74,8 @@ Dettagli operativi nel README + tutorial in conversazione.
 
 - [x] Sostituire i `PLACEHOLDER_UID_*` in `src/content/programs/fsl.md`
       con gli UID Stream reali
-- [ ] Commit unico: font + contact endpoint + fix type-check scaffold + UID reali
+- [x] Commit unico: font + contact endpoint + fix type-check scaffold + UID reali
+      (commit `cadd623`)
 
 ---
 
