@@ -57,16 +57,20 @@ Dettagli operativi nel README + tutorial in conversazione.
         su `*.pages.dev`.
       - Pre-golive con DNS Uniacque: opzionale migrazione a un mittente
         `no-reply@scuole.uniacque.bg.it`, ma non necessaria per operare.
-- [ ] **R2**: bucket + public access via `pub-XXX.r2.dev` + upload asset
-      (mantenere la struttura di cartelle già cablata nei frontmatter)
+- [x] **R2**: bucket `uniacque-scuole-assets` creato, public access
+      abilitato su `https://pub-13224ea6388147de83adf583fe26b9fb.r2.dev`,
+      38 asset caricati nelle cartelle attese (`HP/`, `Sezione Educational/`,
+      `Sezione Water Week/`), tutti i path dei frontmatter verificati 200
 - [x] **Cloudflare Stream**: Starter Bundle attivato, 12 video FSL
       caricati via API/TUS, UID applicati in `fsl.md`.
       Subdomain: `customer-vg6r6z68e7cwtk8f.cloudflarestream.com`
 - [x] **Turnstile**: widget `uniacque-scuole` creato, hostname `localhost`
       (aggiungere `*.pages.dev` e custom domain quando disponibili)
-- [ ] Compilare `.env` locale con tutti i valori raccolti
-- [ ] Test locale `npm run dev` (asset R2 + video Stream)
+- [x] Compilare `.env` locale con tutti i valori raccolti
+- [ ] Test locale `npm run dev` (asset R2 + video Stream) — opzionale, già
+      verificato in produzione su `uniacque-scuole.pages.dev`
 - [ ] Test locale `npx wrangler pages dev -- npm run dev` (contact form → Resend)
+      — opzionale, già verificabile direttamente in produzione
 
 ---
 
@@ -117,18 +121,19 @@ Dettagli operativi nel README + tutorial in conversazione.
 
 ## Fase 4 — Deploy Cloudflare Pages
 
-- [ ] Push repo su GitHub
-- [ ] Connettere repo a Cloudflare Pages, preset Astro
-- [ ] Configurare env vars in Pages (Production + Preview):
+- [x] Push repo su GitHub (`Edoomark/uniacque`, main)
+- [x] Connettere repo a Cloudflare Pages, preset Astro
+- [x] Configurare env vars in Pages (Production + Preview):
       tutte le `PUBLIC_*` + le server-side (`TURNSTILE_SECRET_KEY`,
       `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`)
-- [ ] Sito online su URL provvisorio `uniacque-scuole.pages.dev` (o simile)
-      **fino a quando il DNS non sarà disponibile**
-- [ ] Aggiornare gli hostname consentiti in Turnstile e Stream con l'URL
-      `*.pages.dev` reale ottenuto
+- [x] **Sito online**: https://uniacque-scuole.pages.dev
+      (progetto `uniacque-scuole`, production branch `main`)
+      Resterà su `*.pages.dev` fino a quando il DNS non sarà disponibile.
+- [ ] Aggiornare gli hostname consentiti in Turnstile e Stream con
+      `uniacque-scuole.pages.dev`
 - [ ] Quando il DNS Uniacque sarà disponibile:
   - collegare il custom domain `scuole.uniacque.bg.it` a Pages
-  - aggiornare `astro.config.mjs` (già impostato su quell'URL)
+  - `astro.config.mjs` già impostato su quell'URL
   - aggiornare hostname consentiti di Turnstile e Stream
 
 ---
