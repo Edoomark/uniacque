@@ -21,13 +21,6 @@ infoBoxes:
     value: "30 ore / settimana con produzione finale"
   - label: Iscrizioni
     value: "Dal portale area riservata"
-ctas:
-  - label: Accedi
-    href: "#"
-    variant: primary
-  - label: Registrati
-    href: "#"
-    variant: secondary
 gallery:
   images: []
   videos:

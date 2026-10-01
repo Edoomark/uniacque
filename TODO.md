@@ -82,17 +82,24 @@ Dettagli operativi nel README + tutorial in conversazione.
 ## Fase 2 — Gap tecnici (subito dopo Fase 0)
 
 - [ ] Paginazione news statica (`src/pages/news/[...page].astro` con `paginate()`)
-- [ ] Pagina 404 (`src/pages/404.astro`)
-- [ ] `sitemap.xml` (integrare `@astrojs/sitemap`)
-- [ ] `robots.txt`
-- [ ] Decidere cosa fare di `prose prose-lg`: installare
-      `@tailwindcss/typography`, sostituire con stile custom, o rimuovere
-- [ ] Riconciliare le CTA nei frontmatter (`href: "#"`) con gli URL area
-      riservata già in env — preferibile rimuoverle dai frontmatter e
-      affidarsi a `CtaPair` che legge da env
-- [ ] Menu mobile: aggiungere `aria-expanded` / `aria-controls`
-- [ ] OG image di default in `public/`
-- [ ] Feed RSS news (opzionale)
+      — rimandata: `src/content/news/` è ancora vuota, nessun contenuto
+      da paginare
+- [x] Pagina 404 (`src/pages/404.astro`)
+- [x] `sitemap.xml` (integrazione `@astrojs/sitemap` → genera
+      `/sitemap-index.xml` + `/sitemap-0.xml`)
+- [x] `robots.txt` (statico in `public/`, punta a sitemap-index)
+- [x] `prose prose-lg`: installato `@tailwindcss/typography` come
+      plugin Tailwind v4 (`@plugin "@tailwindcss/typography"` in
+      `global.css`), classi funzionanti
+- [x] Riconciliate CTA nei frontmatter: rimossi i CTA
+      Accedi/Registrati con `href: "#"` dai programs, `ProgramLayout`
+      renderizza sempre `CtaPair` da env; i `ctas` restanti in
+      frontmatter restano per CTA opzionali
+- [x] Menu mobile: aggiunti `aria-expanded` / `aria-controls` +
+      aria-label dinamico
+- [ ] OG image di default in `public/` — in attesa dell'illustrazione
+      brand Uniacque
+- [ ] Feed RSS news (opzionale) — rimandato finché non ci sono news
 
 ---
 

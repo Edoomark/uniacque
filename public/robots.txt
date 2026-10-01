@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://scuole.uniacque.bg.it/sitemap-index.xml

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import Button from '@components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Pagina non trovata"
+  description="La pagina che cercavi non esiste o è stata spostata."
+>
+  <section class="py-24 sm:py-32">
+    <Container size="md" class="text-center">
+      <p class="font-display text-6xl sm:text-7xl font-bold text-primary">404</p>
+      <h1 class="mt-6 text-3xl sm:text-4xl font-bold">Pagina non trovata</h1>
+      <p class="mt-4 text-lg text-ink-soft">
+        La pagina che cercavi non esiste o è stata spostata.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-3">
+        <Button href="/" variant="primary">Torna alla homepage</Button>
+        <Button href="/news" variant="secondary">Vai alle news</Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

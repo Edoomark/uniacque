@@ -23,13 +23,6 @@ infoBoxes:
     value: "Visita guidata + laboratorio a gruppi"
   - label: Accompagnamento
     value: "2 ambassador Uniacque"
-ctas:
-  - label: Accedi
-    href: "#"
-    variant: primary
-  - label: Registrati
-    href: "#"
-    variant: secondary
 gallery:
   images:
     - src: "Sezione Educational/Educational Center/gallery-01.jpg"

@@ -27,6 +27,8 @@ import { site, nav } from '@data/site';
     <button
       class="md:hidden rounded-full p-2 text-primary hover:bg-surface-alt"
       aria-label="Apri menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
       data-mobile-menu-toggle
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -56,9 +58,11 @@ import { site, nav } from '@data/site';
 </header>
 
 <script>
-  const btn = document.querySelector('[data-mobile-menu-toggle]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Chiudi menu' : 'Apri menu');
   });
 </script>

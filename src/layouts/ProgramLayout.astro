@@ -15,21 +15,14 @@ interface Props {
 
 const { program } = Astro.props;
 const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo } = program.data;
-
-const hasLoginCta = ctas.some((c) => /accedi/i.test(c.label));
-const hasRegisterCta = ctas.some((c) => /registrati/i.test(c.label));
-const showCtaPair = hasLoginCta && hasRegisterCta;
-const otherCtas = showCtaPair
-  ? ctas.filter((c) => !/(accedi|registrati)/i.test(c.label))
-  : ctas;
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
   <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero}>
-    {showCtaPair && <CtaPair class="mt-6" />}
-    {otherCtas.length > 0 && (
-      <div class="mt-6 flex flex-wrap gap-3">
-        {otherCtas.map((c) => (
+    <CtaPair class="mt-6" />
+    {ctas.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-3">
+        {ctas.map((c) => (
           <Button href={c.href} variant={c.variant}>{c.label}</Button>
         ))}
       </div>

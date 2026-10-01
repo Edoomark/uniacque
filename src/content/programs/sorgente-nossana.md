@@ -22,13 +22,6 @@ infoBoxes:
     value: "Una mattinata — max 2 classi / 50 bambini"
   - label: Trasporto
     value: "A carico dell'Istituto scolastico"
-ctas:
-  - label: Accedi
-    href: "#"
-    variant: primary
-  - label: Registrati
-    href: "#"
-    variant: secondary
 gallery:
   images:
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-01.jpg"
