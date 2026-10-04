@@ -14,7 +14,6 @@ interface Props {
 const { title, description, image, illustration, href, cta, accent = 'blue' } = Astro.props;
 
 const ringClass = accent === 'orange' ? 'ring-warm/20' : 'ring-accent/40';
-const dotClass = accent === 'orange' ? 'bg-warm' : 'bg-primary';
 ---
 
 <a
@@ -44,7 +43,7 @@ const dotClass = accent === 'orange' ? 'bg-warm' : 'bg-primary';
     <span
       class="mt-2 inline-flex items-center gap-2 font-semibold text-warm-ink transition-transform group-hover:translate-x-1"
     >
-      <span class={`inline-block h-1.5 w-1.5 rounded-full ${dotClass}`}></span>
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-warm"></span>
       {cta}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
         <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
