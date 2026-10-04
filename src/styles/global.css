@@ -12,12 +12,17 @@
 
   --color-accent: #A9D9EC;
   --color-accent-dark: #7CC0DA;
+  --color-accent-soft: #D6EBF5;
+  --color-accent-cloud: #EEF7FB;
 
   --color-warm: #F28C28;
   --color-warm-dark: #D97516;
+  --color-warm-soft: #FDE4CC;
 
   --color-surface: #FAFAF7;
   --color-surface-alt: #F1F2EE;
+  --color-cream: #FFF6E8;
+  --color-cream-dark: #F4E6CB;
 
   --color-ink: #1A1A1A;
   --color-ink-soft: #4A4A4A;

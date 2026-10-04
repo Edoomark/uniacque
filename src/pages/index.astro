@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import HeroCard from '@components/blocks/HeroCard.astro';
-import FeatureGrid from '@components/blocks/FeatureGrid.astro';
+import HomeFeatureCard from '@components/blocks/HomeFeatureCard.astro';
 import ContactForm from '@components/blocks/ContactForm.astro';
 import Container from '@components/ui/Container.astro';
+import HeroMedia from '@components/blocks/HeroMedia.astro';
 import { getEntry, render } from 'astro:content';
 
 const page = await getEntry('pages', 'home');
@@ -11,20 +11,64 @@ if (!page) throw new Error('Missing pages/home entry');
 
 const { title, hero, intro, features, seo } = page.data;
 const { Content } = await render(page);
+const hasBody = (page.body ?? '').trim().length > 0;
+
+const illustrationMap: Record<string, string> = {
+  Educational: '/illustrations/laboratory.png',
+  'Water School': '/illustrations/vr.png',
+  'Area didattica': '/illustrations/graduation.png',
+  News: '/illustrations/doc.png',
+};
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  {hero && (
-    <HeroCard title={title} intro={intro} hero={hero} />
+  <section class="relative h-screen min-h-[600px] max-h-[920px] overflow-hidden">
+    {hero && (
+      <HeroMedia
+        hero={hero}
+        rounded={false}
+        class="absolute inset-0 h-full w-full"
+      />
+    )}
+
+    <!-- Scrim per leggibilità del testo in overlay in basso -->
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/90 via-primary/55 to-transparent"></div>
+
+    <Container size="xl" class="relative z-10 flex h-full items-end pb-12 sm:pb-16 lg:pb-20">
+      <div class="max-w-2xl text-white">
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+          {title}
+        </h1>
+        {intro && (
+          <p class="mt-6 max-w-xl text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed">
+            {intro}
+          </p>
+        )}
+      </div>
+    </Container>
+  </section>
+
+  {hasBody && (
+    <Container size="lg" class="py-12 prose prose-lg max-w-none">
+      <Content />
+    </Container>
   )}
 
-  <Container size="lg" class="py-8 prose prose-lg max-w-none">
-    <Content />
-  </Container>
-
-  <section class="py-12 sm:py-20 bg-surface-alt">
+  <section class="py-12 sm:py-20 bg-accent-cloud">
     <Container size="xl">
-      <FeatureGrid features={features} columns={2} />
+      <div class="grid gap-6 sm:grid-cols-2">
+        {features.map((f, i) => (
+          <HomeFeatureCard
+            title={f.title}
+            description={f.description}
+            image={f.image}
+            illustration={illustrationMap[f.title]}
+            href={f.cta.href}
+            cta={f.cta.label}
+            accent={i % 2 === 0 ? 'blue' : 'orange'}
+          />
+        ))}
+      </div>
     </Container>
   </section>
 

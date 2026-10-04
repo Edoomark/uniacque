@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
-import Button from '@components/ui/Button.astro';
 import Container from '@components/ui/Container.astro';
 import { getEntry, getCollection, render } from 'astro:content';
 
@@ -10,6 +9,7 @@ if (!page) throw new Error('Missing pages/water-school entry');
 
 const { title, hero, intro, seo } = page.data;
 const { Content } = await render(page);
+const hasBody = (page.body ?? '').trim().length > 0;
 
 const editions = (await getCollection('waterEditions')).sort(
   (a, b) => b.data.year - a.data.year
@@ -17,21 +17,36 @@ const editions = (await getCollection('waterEditions')).sort(
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  {hero && <HeroCard title={title} intro={intro} hero={hero} />}
+  {hero && (
+    <HeroCard
+      title={title}
+      intro={intro}
+      hero={hero}
+      illustration="/illustrations/vr.png"
+    />
+  )}
 
-  <Container size="lg" class="py-8 prose prose-lg max-w-none">
-    <Content />
-  </Container>
+  {hasBody && (
+    <Container size="lg" class="py-12 prose prose-lg max-w-none">
+      <Content />
+    </Container>
+  )}
 
   {editions.length > 0 && (
-    <section class="py-12 sm:py-20 bg-surface-alt">
-      <Container size="lg">
-        <h2 class="mb-8 text-3xl font-bold text-primary">Edizioni</h2>
-        <div class="flex flex-wrap gap-4">
+    <section class="relative py-16 sm:py-24 bg-accent-cloud">
+      <Container size="xl" class="relative">
+        <h2 class="mb-8 font-display text-3xl font-bold text-primary">Edizioni</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {editions.map((e) => (
-            <Button href={`/water-school/${e.id}`} variant="primary">
-              {e.data.title}
-            </Button>
+            <a
+              href={`/water-school/${e.id}`}
+              class="group flex items-center justify-between gap-4 rounded-card bg-white p-6 shadow-sm ring-1 ring-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 class="font-display text-xl font-bold text-primary">{e.data.title}</h3>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-warm transition-transform group-hover:translate-x-1" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
           ))}
         </div>
       </Container>

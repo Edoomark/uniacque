@@ -15,28 +15,40 @@ interface Props {
 
 const { program } = Astro.props;
 const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo } = program.data;
+
+const illustrationMap: Record<string, string> = {
+  'educational-center': '/illustrations/laboratory.png',
+  'fsl': '/illustrations/roboto.png',
+  'missione-comune': '/illustrations/mc-rubinetto.png',
+  'sorgente-nossana': '/illustrations/design-science.png',
+};
+const illustration = illustrationMap[program.id];
+
+const hasBody = (program.body ?? '').trim().length > 0;
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero}>
-    <CtaPair class="mt-6" />
-    {ctas.length > 0 && (
-      <div class="mt-4 flex flex-wrap gap-3">
-        {ctas.map((c) => (
-          <Button href={c.href} variant={c.variant}>{c.label}</Button>
-        ))}
-      </div>
-    )}
+  <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero} illustration={illustration}>
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <CtaPair />
+      {ctas.length > 0 && ctas.map((c) => (
+        <Button href={c.href} variant={c.variant}>{c.label}</Button>
+      ))}
+    </div>
   </HeroCard>
 
-  <section class="py-12 sm:py-16">
-    <Container size="lg" class="prose prose-lg max-w-none">
-      <slot />
-    </Container>
-  </section>
+  {hasBody && (
+    <section class="py-14 sm:py-20">
+      <Container size="lg">
+        <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
+          <slot />
+        </article>
+      </Container>
+    </section>
+  )}
 
   {infoBoxes.length > 0 && (
-    <section class="py-8 sm:py-12">
+    <section class="pb-10 sm:pb-14">
       <Container size="lg">
         <InfoBoxGrid items={infoBoxes} />
       </Container>
@@ -44,9 +56,9 @@ const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo } 
   )}
 
   {note && (
-    <section class="pb-8">
+    <section class="pb-10">
       <Container size="lg">
-        <div class="rounded-box border-l-4 border-warm bg-warm/10 p-4 text-ink-soft">
+        <div class="rounded-card bg-warm-soft/60 p-5 sm:p-6 text-ink ring-1 ring-warm/20">
           {note}
         </div>
       </Container>
@@ -54,29 +66,39 @@ const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo } 
   )}
 
   {contactEmail && (
-    <section class="pb-8">
+    <section class="pb-14 sm:pb-20">
       <Container size="lg">
-        <p class="text-ink-soft">
-          Per informazioni scrivi a
-          <a href={`mailto:${contactEmail}`} class="text-primary underline">{contactEmail}</a>.
-        </p>
+        <div class="relative overflow-hidden rounded-card bg-primary p-6 sm:p-8 text-white shadow-lg">
+          <div class="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-warm/15 blur-2xl"></div>
+          <div class="relative flex flex-wrap items-center justify-between gap-4">
+            <p class="text-base sm:text-lg text-white/90">
+              Per informazioni scrivi a
+              <a
+                href={`mailto:${contactEmail}`}
+                class="ml-1 inline-flex items-center gap-1 font-semibold text-warm-soft underline decoration-warm/50 underline-offset-4 hover:text-white"
+              >
+                {contactEmail}
+              </a>
+            </p>
+          </div>
+        </div>
       </Container>
     </section>
   )}
 
   {gallery?.images && gallery.images.length > 0 && (
-    <section class="py-12 sm:py-16 bg-surface-alt">
+    <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="xl">
-        <h2 class="mb-8 text-2xl sm:text-3xl font-bold text-primary">Galleria</h2>
+        <h2 class="mb-8 font-display text-2xl sm:text-3xl font-bold text-primary">Galleria</h2>
         <Gallery images={gallery.images} columns={3} />
       </Container>
     </section>
   )}
 
   {gallery?.videos && gallery.videos.length > 0 && (
-    <section class="py-12 sm:py-16">
+    <section class="py-14 sm:py-20">
       <Container size="xl">
-        <h2 class="mb-8 text-2xl sm:text-3xl font-bold text-primary">Video</h2>
+        <h2 class="mb-8 font-display text-2xl sm:text-3xl font-bold text-primary">Video</h2>
         <VideoGallery videos={gallery.videos} columns={2} />
       </Container>
     </section>

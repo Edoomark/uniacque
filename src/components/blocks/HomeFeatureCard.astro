@@ -5,16 +5,21 @@ interface Props {
   title: string;
   description: string;
   image: { src: string; alt: string };
-  cta: { label: string; href: string; variant?: 'primary' | 'secondary' | 'ghost' };
   illustration?: string;
+  href: string;
+  cta: string;
+  accent?: 'blue' | 'orange';
 }
 
-const { title, description, image, cta, illustration } = Astro.props;
+const { title, description, image, illustration, href, cta, accent = 'blue' } = Astro.props;
+
+const ringClass = accent === 'orange' ? 'ring-warm/20' : 'ring-accent/40';
+const dotClass = accent === 'orange' ? 'bg-warm' : 'bg-primary';
 ---
 
 <a
-  href={cta.href}
-  class="group relative flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ring-accent/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+  href={href}
+  class={`group relative flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ${ringClass} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
 >
   <div class="relative aspect-[16/10] overflow-hidden bg-accent-soft">
     <R2Image
@@ -32,11 +37,15 @@ const { title, description, image, cta, illustration } = Astro.props;
       />
     )}
   </div>
+
   <div class="flex flex-1 flex-col gap-3 p-6">
     <h3 class="font-display text-2xl font-bold text-primary">{title}</h3>
     <p class="flex-1 text-ink-soft leading-relaxed">{description}</p>
-    <span class="mt-2 inline-flex items-center gap-2 font-semibold text-warm transition-transform group-hover:translate-x-1">
-      {cta.label}
+    <span
+      class="mt-2 inline-flex items-center gap-2 font-semibold text-warm transition-transform group-hover:translate-x-1"
+    >
+      <span class={`inline-block h-1.5 w-1.5 rounded-full ${dotClass}`}></span>
+      {cta}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
         <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
       </svg>

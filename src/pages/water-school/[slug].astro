@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
 import Gallery from '@components/blocks/Gallery.astro';
+import InfoBoxGrid from '@components/blocks/InfoBoxGrid.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
@@ -17,49 +18,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { edition } = Astro.props as { edition: CollectionEntry<'waterEditions'> };
 const { title, hero, weeks, themes, format, jury, prize, gallery, note, seo } = edition.data;
 const { Content } = await render(edition);
+
+const infoBoxes = [
+  weeks ? { label: 'Durata', value: `${weeks} settimane` } : null,
+  themes.length > 0 ? { label: 'Temi', value: themes.join(' · ') } : null,
+  format.length > 0 ? { label: 'Format', value: format.join(' · ') } : null,
+  jury ? { label: 'Giuria', value: jury } : null,
+  prize ? { label: 'Premio', value: prize } : null,
+].filter((x): x is { label: string; value: string } => x !== null);
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  <HeroCard title={title} eyebrow="Water School" hero={hero} />
+  <HeroCard title={title} eyebrow="Water School" hero={hero} illustration="/illustrations/vr.png" />
 
   <Container size="lg" class="py-8 prose prose-lg max-w-none">
     <Content />
   </Container>
 
-  <Container size="lg" class="pb-12">
-    <dl class="grid gap-4 sm:grid-cols-2">
-      {weeks && (
-        <div class="rounded-box bg-accent p-6 text-primary">
-          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Durata</dt>
-          <dd class="mt-2 text-lg font-medium">{weeks} settimane</dd>
-        </div>
-      )}
-      {themes.length > 0 && (
-        <div class="rounded-box bg-accent p-6 text-primary">
-          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Temi</dt>
-          <dd class="mt-2 text-lg font-medium">{themes.join(' · ')}</dd>
-        </div>
-      )}
-      {format.length > 0 && (
-        <div class="rounded-box bg-accent p-6 text-primary">
-          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Format</dt>
-          <dd class="mt-2 text-lg font-medium">{format.join(' · ')}</dd>
-        </div>
-      )}
-      {jury && (
-        <div class="rounded-box bg-accent p-6 text-primary">
-          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Giuria</dt>
-          <dd class="mt-2 text-lg font-medium">{jury}</dd>
-        </div>
-      )}
-      {prize && (
-        <div class="rounded-box bg-accent p-6 text-primary">
-          <dt class="text-sm font-semibold uppercase tracking-wide opacity-80">Premio</dt>
-          <dd class="mt-2 text-lg font-medium">{prize}</dd>
-        </div>
-      )}
-    </dl>
-  </Container>
+  {infoBoxes.length > 0 && (
+    <Container size="lg" class="pb-12">
+      <InfoBoxGrid items={infoBoxes} />
+    </Container>
+  )}
 
   {note && (
     <Container size="lg" class="pb-8">

@@ -7,23 +7,36 @@ interface Props {
   eyebrow?: string;
   intro?: string;
   hero: Parameters<typeof HeroMedia>[0]['hero'];
+  illustration?: string;
 }
 
-const { title, eyebrow, intro, hero } = Astro.props;
+const { title, eyebrow, intro, hero, illustration } = Astro.props;
 ---
 
-<section class="relative bg-primary pt-8 pb-24 sm:pt-12 sm:pb-32">
-  <Container size="xl">
-    <HeroMedia hero={hero} class="aspect-[16/8] sm:aspect-[16/7]" />
-  </Container>
+<section class="relative h-screen min-h-[600px] max-h-[920px] overflow-hidden">
+  <HeroMedia hero={hero} rounded={false} class="absolute inset-0 h-full w-full" />
 
-  <Container size="lg" class="relative -mt-20 sm:-mt-28">
-    <div class="rounded-card bg-white p-6 sm:p-10 shadow-lg">
-      {eyebrow && (
-        <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-warm">{eyebrow}</p>
+  <Container size="xl" class="relative z-10 flex h-full items-end pb-20 sm:pb-28">
+    <div class="relative w-full max-w-2xl rounded-card bg-white p-6 sm:p-10 shadow-2xl ring-1 ring-accent/20">
+      {illustration && (
+        <img
+          src={illustration}
+          alt=""
+          class="pointer-events-none absolute -top-16 -right-6 sm:-top-20 sm:-right-10 h-32 w-32 sm:h-40 sm:w-40 object-contain drop-shadow-xl"
+          loading="eager"
+          decoding="async"
+        />
       )}
-      <h1 class="text-3xl sm:text-5xl font-bold text-primary">{title}</h1>
-      {intro && <p class="mt-4 text-lg text-ink-soft">{intro}</p>}
+      {eyebrow && (
+        <p class="inline-flex items-center gap-2 rounded-full bg-warm/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-warm ring-1 ring-warm/20">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-warm"></span>
+          {eyebrow}
+        </p>
+      )}
+      <h1 class={`${eyebrow ? 'mt-3' : ''} font-display text-3xl sm:text-5xl font-bold text-primary leading-tight`}>
+        {title}
+      </h1>
+      {intro && <p class="mt-4 max-w-xl text-lg text-ink-soft leading-relaxed">{intro}</p>}
       <slot />
     </div>
   </Container>

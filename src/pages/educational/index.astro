@@ -10,10 +10,18 @@ if (!page) throw new Error('Missing pages/educational entry');
 
 const { title, hero, intro, seo } = page.data;
 const { Content } = await render(page);
+const hasBody = (page.body ?? '').trim().length > 0;
 
 const programs = (await getCollection('programs')).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+const illustrationMap: Record<string, string> = {
+  'educational-center': '/illustrations/laboratory.png',
+  'fsl': '/illustrations/roboto.png',
+  'missione-comune': '/illustrations/mc-rubinetto.png',
+  'sorgente-nossana': '/illustrations/design-science.png',
+};
 
 const features = programs.map((p) => ({
   title: p.data.title,
@@ -24,18 +32,33 @@ const features = programs.map((p) => ({
       ? p.data.hero.image
       : { src: p.data.hero.video.poster ?? '', alt: p.data.hero.video.alt }),
   cta: { label: 'Scopri di più', href: `/educational/${p.id}`, variant: 'primary' as const },
+  illustration: illustrationMap[p.id],
 }));
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  {hero && <HeroCard title={title} intro={intro} hero={hero} />}
+  {hero && (
+    <HeroCard
+      title={title}
+      intro={intro}
+      hero={hero}
+      illustration="/illustrations/graduation.png"
+    />
+  )}
 
-  <Container size="lg" class="py-8 prose prose-lg max-w-none">
-    <Content />
-  </Container>
+  {hasBody && (
+    <Container size="lg" class="py-12 prose prose-lg max-w-none">
+      <Content />
+    </Container>
+  )}
 
-  <section class="py-12 sm:py-20 bg-surface-alt">
-    <Container size="xl">
+  <section class="relative py-16 sm:py-24 bg-accent-cloud">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-40"
+      style="background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px); background-size: 32px 32px;"
+      aria-hidden="true"
+    ></div>
+    <Container size="xl" class="relative">
       <FeatureGrid features={features} columns={2} />
     </Container>
   </section>

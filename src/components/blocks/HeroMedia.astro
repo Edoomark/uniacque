@@ -14,12 +14,14 @@ interface HeroVideo {
 interface Props {
   hero: HeroImage | HeroVideo;
   class?: string;
+  rounded?: boolean;
 }
 
-const { hero, class: className = '' } = Astro.props;
+const { hero, class: className = '', rounded = true } = Astro.props;
+const roundedClass = rounded ? 'rounded-hero' : '';
 ---
 
-<div class={`relative w-full overflow-hidden rounded-hero bg-primary ${className}`}>
+<div class={`overflow-hidden ${roundedClass} bg-primary ${className}`}>
   {hero.type === 'image' && (
     <R2Image
       src={hero.image.src}

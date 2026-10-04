@@ -22,16 +22,45 @@ const items = articles.map((a) => ({
   title="News"
   description="Aggiornamenti, storie ed eventi dai progetti educational di Uniacque."
 >
-  <section class="bg-primary py-16 sm:py-20 text-white">
-    <Container size="xl">
-      <h1 class="text-4xl sm:text-5xl font-bold">News</h1>
-      <p class="mt-3 text-lg opacity-90">
-        Aggiornamenti, storie ed eventi dai nostri progetti educativi.
-      </p>
+  <section class="relative overflow-hidden bg-primary text-white min-h-[560px]">
+    <!-- Dots pattern -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.08]"
+      style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 34px 34px;"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Blobs -->
+    <div class="pointer-events-none absolute -top-32 -right-20 h-96 w-96 rounded-full bg-primary-light opacity-50 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 left-1/4 h-80 w-80 rounded-full bg-warm opacity-20 blur-3xl"></div>
+
+    <Container size="xl" class="relative py-20 sm:py-28">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div class="relative z-10 max-w-2xl">
+          <span class="inline-block h-1 w-14 rounded-full bg-warm"></span>
+          <h1 class="mt-5 font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95]">
+            News
+          </h1>
+          <p class="mt-6 text-lg sm:text-xl text-white/85 leading-relaxed">
+            Aggiornamenti, storie ed eventi dai nostri progetti educativi.
+          </p>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-sm lg:max-w-none">
+          <div class="pointer-events-none absolute inset-0 -z-10 scale-125 rounded-full bg-primary-light/40 blur-2xl"></div>
+          <img
+            src="/illustrations/doc.png"
+            alt=""
+            class="relative mx-auto w-full max-w-[360px] rotate-[6deg] drop-shadow-[0_30px_60px_rgba(0,0,0,0.35)]"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
     </Container>
   </section>
 
-  <section class="py-12 sm:py-16">
+  <section class="py-14 sm:py-20 bg-accent-cloud">
     <Container size="xl">
       <NewsGrid items={items} />
     </Container>

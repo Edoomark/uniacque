@@ -6,10 +6,10 @@ const SUBDOMAIN = import.meta.env.PUBLIC_STREAM_SUBDOMAIN ?? '';
  */
 export function streamEmbedUrl(uid: string): string {
   if (!uid) return '';
-  const base = SUBDOMAIN
-    ? `https://${SUBDOMAIN}`
-    : 'https://iframe.videodelivery.net';
-  return `${base}/${uid}`;
+  if (SUBDOMAIN) {
+    return `https://${SUBDOMAIN}/${uid}/iframe`;
+  }
+  return `https://iframe.videodelivery.net/${uid}`;
 }
 
 /**
