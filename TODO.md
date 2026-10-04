@@ -9,30 +9,28 @@ cliente) e task post-lancio.
 
 ## 🔴 Blocker esterni (in attesa di terzi)
 
-- [ ] **DNS `uniacque.bg.it`**: contatto tecnico trovato il 2026-10-01 —
-      Alex Perez (`aperez@imteam.it`, Yamme Srl / Gruppo IMteam), introdotto
-      da Antonio Sarti Deponti (Uniacque). In attesa di risposta a mail con
-      proposta tecnica + richiesta dati.
-      Opzione proposta a Yamme (nuova, preferita):
-  0. **Subdomain delegation**: 2 record NS su `scuole.uniacque.bg.it` →
-     nameserver Cloudflare. Loro intervengono una sola volta, noi
-     gestiamo in autonomia tutto sotto `scuole.*` (sito, CDN su
-     `cdn.scuole.*`, email transazionale `no-reply@scuole.*`).
-     Il resto di `uniacque.bg.it` (mail, PEC, servizi interni) resta
-     intoccato sui loro NS.
-  Piani di fallback (in ordine):
-  1. delega del DNS dell'intero dominio a Cloudflare (improbabile)
-  2. accesso in scrittura al loro pannello DNS (improbabile per policy)
-  3. richiesta puntuale: loro aggiungono i singoli record di volta in
-     volta (Resend, CNAME Pages, CNAME R2)
-  Dati chiesti nella mail: registrar del dominio, provider DNS attuale,
-  hosting attuale di `www.educational.uniacque.bg.it`, record
-  SPF/DKIM/DMARC già presenti, conferma del subdomain finale
-  (`scuole.*` vs mantenere `educational.*`).
+- [ ] **DNS `uniacque.bg.it`** — decisione lato Uniacque arrivata il 2026-10-02.
+      Modello adottato = **Opzione 3** (record puntuali). Andrea Gamba
+      (`andrea.gamba@uniacque.bg.it`, Uniacque Digitalizzazione e Sistemi
+      Informativi) ha **rifiutato subdomain delegation** per sicurezza/governance:
+      ogni record (CNAME/TXT/MX) va chiesto puntualmente a lui, che lo inserisce
+      sul DNS autoritativo.
+      **Prossimi step bloccanti:**
+  1. **Antonio Sarti Deponti sceglie il nome del subdomain** (`educational.*`
+     oppure `scuole.*` o altro) — spetta a Uniacque Comunicazione.
+  2. Preparare email ad **Andrea Gamba** (cc Antonio) con l'elenco esatto
+     dei record da inserire, in base al subdomain scelto:
+     - `CNAME <subdomain>.uniacque.bg.it → uniacque-scuole.pages.dev`
+     - (opzionale CDN R2) `CNAME cdn.<subdomain>.uniacque.bg.it → bucket R2 custom hostname`
+     - (opzionale Resend) record SPF/DKIM/MX per invio da `no-reply@<subdomain>.uniacque.bg.it`
+  3. Dopo l'inserimento, collegare custom domain in Cloudflare Pages +
+     aggiornare `astro.config.mjs` se il subdomain scelto è diverso da
+     `scuole.uniacque.bg.it`.
   Blocca:
-  - Verifica dominio Resend per invio email di produzione
-  - Custom domain R2 (`cdn.uniacque.bg.it` o `cdn.scuole.*`) — sostituibile per ora con URL `*.r2.dev`
-  - Custom domain Cloudflare Pages (`scuole.uniacque.bg.it`) — sostituibile per ora con URL `*.pages.dev`
+  - Custom domain Cloudflare Pages (ora `*.pages.dev`)
+  - Custom domain R2 (ora `pub-*.r2.dev` diretto)
+  - Verifica dominio Resend per mittente `no-reply@<subdomain>.uniacque.bg.it`
+    (ora mittente provvisorio su `no-reply@edoolearning.com` già verificato)
 - [ ] **Testi finali approvati**: confermare che i draft in `src/content/**/*.md`
       siano definitivi, oppure ricevere i testi ufficiali
 - [ ] **Brand guideline Uniacque**: hex colori esatti + eventuali font ufficiali
