@@ -1,5 +1,5 @@
 ---
-import { r2Url } from '@lib/r2';
+import { r2Url, cfImage, cfSrcset } from '@lib/r2';
 
 interface Props {
   src: string;
@@ -9,6 +9,8 @@ interface Props {
   decoding?: 'auto' | 'sync' | 'async';
   width?: number;
   height?: number;
+  sizes?: string;
+  widths?: number[];
 }
 
 const {
@@ -19,13 +21,19 @@ const {
   decoding = 'async',
   width,
   height,
+  sizes,
+  widths,
 } = Astro.props;
 
-const url = r2Url(src);
+const absolute = r2Url(src);
+const url = cfImage(absolute, { width, height });
+const srcset = widths ? cfSrcset(absolute, widths) : '';
 ---
 
 <img
   src={url}
+  srcset={srcset || undefined}
+  sizes={sizes}
   alt={alt}
   class={className}
   loading={loading}

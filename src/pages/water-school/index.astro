@@ -40,10 +40,10 @@ const editions = (await getCollection('waterEditions')).sort(
           {editions.map((e) => (
             <a
               href={`/water-school/${e.id}`}
-              class="group flex items-center justify-between gap-4 rounded-card bg-white p-6 shadow-sm ring-1 ring-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg"
+              class="group flex items-center justify-between gap-4 rounded-card bg-white p-6 shadow-sm ring-1 ring-accent/30 transition-all hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm focus-visible:ring-offset-2"
             >
               <h3 class="font-display text-xl font-bold text-primary">{e.data.title}</h3>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-warm transition-transform group-hover:translate-x-1" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-warm-ink transition-transform group-hover:translate-x-1" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </a>

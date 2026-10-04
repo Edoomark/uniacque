@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { id = 'contatti' } = Astro.props;
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 ---
 
 <section id={id} class="bg-primary py-16 sm:py-24 text-white">
@@ -68,8 +67,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         ></textarea>
       </label>
 
-      <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
-
       <div class="flex items-center justify-between gap-4">
         <p class="text-xs text-ink-soft">
           Inviando accetti la <a href={site.privacyUrl} class="underline">privacy policy</a>.
@@ -86,12 +83,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     </form>
   </Container>
 </section>
-
-<script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-></script>
 
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
@@ -120,15 +111,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
       if (res.ok && data.ok) {
         form.reset();
-        // @ts-expect-error Turnstile injects a global reset helper
-        window.turnstile?.reset();
         setStatus('ok', 'Messaggio inviato. Ti risponderemo al più presto.');
       } else {
         const map: Record<string, string> = {
           'missing-fields': 'Compila tutti i campi obbligatori.',
           'invalid-email': 'Indirizzo email non valido.',
-          'missing-captcha': 'Completa la verifica antispam.',
-          'captcha-failed': 'Verifica antispam non superata, riprova.',
           'send-failed': 'Invio non riuscito, riprova tra qualche minuto.',
         };
         setStatus('err', map[data.error ?? ''] ?? 'Errore imprevisto, riprova.');

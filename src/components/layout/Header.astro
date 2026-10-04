@@ -23,17 +23,17 @@ function hashOf(href: string): string | undefined {
 }
 
 const linkBase =
-  'relative inline-flex items-center rounded-full px-4 py-2 font-display text-sm font-semibold transition-colors text-ink hover:text-primary hover:bg-accent-soft/60 aria-[current=page]:bg-warm/10 aria-[current=page]:text-warm after:absolute after:inset-x-4 after:bottom-1 after:h-0.5 after:rounded-full after:bg-warm after:opacity-0 aria-[current=page]:after:opacity-100 after:transition-opacity';
+  'relative inline-flex items-center rounded-full px-4 py-2 font-display text-sm font-semibold transition-colors text-ink hover:text-primary hover:bg-accent-soft/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm focus-visible:ring-offset-2 aria-[current=page]:bg-warm/10 aria-[current=page]:text-warm-ink after:absolute after:inset-x-4 after:bottom-1 after:h-0.5 after:rounded-full after:bg-warm after:opacity-0 aria-[current=page]:after:opacity-100 after:transition-opacity';
 
 const mobileLinkBase =
-  'block rounded-box px-4 py-3 font-display text-base font-semibold transition-colors text-ink hover:bg-accent-soft hover:text-primary aria-[current=page]:bg-warm/10 aria-[current=page]:text-warm';
+  'block rounded-box px-4 py-3 font-display text-base font-semibold transition-colors text-ink hover:bg-accent-soft hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm focus-visible:ring-inset aria-[current=page]:bg-warm/10 aria-[current=page]:text-warm-ink';
 ---
 
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur shadow-[0_1px_0_var(--color-accent-soft)]">
   <Container size="xl" class="flex items-center justify-between py-3 sm:py-4">
     <a
       href="/"
-      class="group flex items-center gap-2.5 font-display text-xl font-bold text-primary"
+      class="group flex items-center gap-2.5 rounded-full font-display text-xl font-bold text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm focus-visible:ring-offset-2"
       aria-label={`${site.shortName} — homepage`}
     >
       <span class="relative inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-primary transition-transform group-hover:rotate-[-8deg] group-hover:scale-105">

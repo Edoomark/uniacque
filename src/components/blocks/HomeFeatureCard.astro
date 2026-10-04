@@ -19,7 +19,7 @@ const dotClass = accent === 'orange' ? 'bg-warm' : 'bg-primary';
 
 <a
   href={href}
-  class={`group relative flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ${ringClass} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+  class={`group relative flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ${ringClass} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm focus-visible:ring-offset-2`}
 >
   <div class="relative aspect-[16/10] overflow-hidden bg-accent-soft">
     <R2Image
@@ -42,7 +42,7 @@ const dotClass = accent === 'orange' ? 'bg-warm' : 'bg-primary';
     <h3 class="font-display text-2xl font-bold text-primary">{title}</h3>
     <p class="flex-1 text-ink-soft leading-relaxed">{description}</p>
     <span
-      class="mt-2 inline-flex items-center gap-2 font-semibold text-warm transition-transform group-hover:translate-x-1"
+      class="mt-2 inline-flex items-center gap-2 font-semibold text-warm-ink transition-transform group-hover:translate-x-1"
     >
       <span class={`inline-block h-1.5 w-1.5 rounded-full ${dotClass}`}></span>
       {cta}

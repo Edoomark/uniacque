@@ -65,6 +65,44 @@ supporta anche `r2`, `youtube`, `bunny` se si volesse cambiare provider.
 3. Build command: `npm run build`, output: `dist`
 4. Variabili d'ambiente (Production + Preview):
    - `PUBLIC_*` da `.env.example` (client-side, embedded nel build)
-   - `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (server-side, solo Pages Functions)
-5. Turnstile: crea widget su Cloudflare dashboard → Turnstile e associalo al dominio del sito
-6. Resend: verifica il dominio mittente (SPF/DKIM) per abilitare `CONTACT_FROM_EMAIL`
+   - `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (server-side, solo Pages Functions)
+5. Resend: verifica il dominio mittente (SPF/DKIM) per abilitare `CONTACT_FROM_EMAIL`
+
+## Flusso redazionale news
+
+Le news sono file Markdown in `src/content/news/`. Pubblicarne una nuova = un
+commit + push, Cloudflare Pages fa auto-deploy in ~1 minuto.
+
+1. Creare un file `src/content/news/<slug-url-friendly>.md`, es.
+   `2026-10-waterweek-vincitori.md`. Lo `slug` del file diventa l'URL:
+   `/news/2026-10-waterweek-vincitori`.
+2. Scrivere il frontmatter secondo lo schema definito in `src/content.config.ts`
+   (collezione `news`), e sotto il corpo in Markdown:
+   ```yaml
+   ---
+   title: "Titolo dell'articolo"
+   date: 2026-10-15
+   excerpt: "Riassunto breve (1-2 frasi) che compare nelle card news."
+   cover:
+     src: "News/2026-10/cover.jpg"       # path relativo nel bucket R2
+     alt: "Testo alternativo descrittivo della copertina"
+   tags: ["waterweek", "edizione-2026"]  # opzionale
+   related: ["slug-articolo-correlato"]  # opzionale, usa gli slug degli altri .md
+   draft: false                           # true = non pubblicato
+   seo:
+     description: "Descrizione per motori di ricerca e social (max 160 caratteri)."
+   ---
+
+   Corpo dell'articolo in **Markdown**. Supporta elenchi, link, immagini
+   e tutto quello che la typography plugin di Tailwind renderizza con `prose`.
+   ```
+3. Caricare le immagini citate nel frontmatter (`cover.src` + eventuali immagini
+   inline) nel bucket R2 `uniacque-scuole-assets`, rispettando il path indicato.
+4. Commit + push su `main`. Cloudflare Pages rilascia automaticamente in
+   produzione in ~1 minuto. L'articolo appare nella lista `/news` e all'URL
+   `/news/<slug>`.
+5. Per una **bozza non pubblica**, impostare `draft: true` nel frontmatter.
+   Resterà visibile solo in dev locale (`npm run dev`).
+6. Per una **preview prima di pubblicare**, lavorare su un branch Git diverso
+   da `main`: Pages genera automaticamente un URL preview (`<branch>.uniacque-scuole.pages.dev`)
+   ad ogni push.

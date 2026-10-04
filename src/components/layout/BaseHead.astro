@@ -12,6 +12,7 @@ interface Props {
 const { title, description = site.description, ogImage, canonical } = Astro.props;
 const fullTitle = title === site.name ? title : `${title} · ${site.name}`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
+const analyticsToken = import.meta.env.PUBLIC_WEB_ANALYTICS_TOKEN ?? '';
 ---
 
 <meta charset="utf-8" />
@@ -30,3 +31,11 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? site
 <meta property="og:url" content={canonicalUrl} />
 {ogImage && <meta property="og:image" content={ogImage} />}
 <meta name="twitter:card" content="summary_large_image" />
+
+{analyticsToken && (
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={`{"token": "${analyticsToken}"}`}
+  ></script>
+)}
