@@ -9,6 +9,34 @@ if (!page) throw new Error('Missing pages/area-didattica entry');
 
 const { title, seo } = page.data;
 const { Content } = await render(page);
+
+const resources = [
+  {
+    title: 'Approfondimenti',
+    description: 'Contenuti tematici sul ciclo dell\u2019acqua.',
+    icon: '/illustrations/doc.png',
+  },
+  {
+    title: 'Giochi',
+    description: 'Attivit\u00e0 ludico-didattiche.',
+    icon: '/illustrations/roboto.png',
+  },
+  {
+    title: 'Laboratori',
+    description: 'Schede operative da svolgere in classe.',
+    icon: '/illustrations/laboratory.png',
+  },
+  {
+    title: 'Esperimenti',
+    description: 'Protocolli pratici.',
+    icon: '/illustrations/design-science.png',
+  },
+  {
+    title: 'Pillole',
+    description: 'Brevi video divulgativi.',
+    icon: '/illustrations/vr.png',
+  },
+];
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
@@ -52,7 +80,31 @@ const { Content } = await render(page);
     </Container>
   </section>
 
-  <Container size="md" class="py-14 sm:py-20 prose prose-lg max-w-none">
+  <Container size="md" class="pt-14 sm:pt-20 pb-8 sm:pb-10 prose prose-lg max-w-none">
     <Content />
   </Container>
+
+  <section class="bg-accent-cloud py-14 sm:py-20">
+    <Container size="lg">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {resources.map((r) => (
+          <article class="group relative flex flex-col items-start gap-5 rounded-card bg-white p-7 shadow-sm ring-1 ring-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-primary/10">
+              <img
+                src={r.icon}
+                alt=""
+                class="h-11 w-11 object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+            <div>
+              <h3 class="font-display text-xl font-bold text-primary">{r.title}</h3>
+              <p class="mt-2 text-ink-soft leading-relaxed">{r.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
 </BaseLayout>
