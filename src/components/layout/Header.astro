@@ -108,9 +108,49 @@ const mobileLinkBase =
 <script>
   const btn = document.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('hidden') === false;
-    btn.setAttribute('aria-expanded', String(isOpen));
-    btn.setAttribute('aria-label', isOpen ? 'Chiudi menu' : 'Apri menu');
-  });
+
+  if (btn && menu) {
+    const focusableSelector = 'a[href], button:not([disabled])';
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+      document.body.classList.toggle('overflow-hidden', open);
+      if (open) {
+        menu.querySelector<HTMLElement>(focusableSelector)?.focus();
+      } else {
+        btn.focus();
+      }
+    };
+
+    btn.addEventListener('click', () => {
+      setOpen(menu.classList.contains('hidden'));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (menu.classList.contains('hidden')) return;
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key === 'Tab') {
+        const nodes = Array.from(menu.querySelectorAll<HTMLElement>(focusableSelector));
+        if (nodes.length === 0) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    menu.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => setOpen(false))
+    );
+  }
 </script>
