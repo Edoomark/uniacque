@@ -9,9 +9,11 @@ interface Props {
   canonical?: string;
 }
 
-const { title, description = site.description, ogImage, canonical } = Astro.props;
+const { title, description = site.description, ogImage = '/og-image.png', canonical } = Astro.props;
 const fullTitle = title === site.name ? title : `${title} · ${site.name}`;
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
+const siteOrigin = Astro.site ?? site.url;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteOrigin).toString();
+const ogImageUrl = new URL(ogImage, siteOrigin).toString();
 const analyticsToken = import.meta.env.PUBLIC_WEB_ANALYTICS_TOKEN ?? '';
 ---
 
@@ -29,8 +31,14 @@ const analyticsToken = import.meta.env.PUBLIC_WEB_ANALYTICS_TOKEN ?? '';
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="it_IT" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
 
 {analyticsToken && (
   <script
