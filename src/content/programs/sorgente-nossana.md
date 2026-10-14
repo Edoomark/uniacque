@@ -1,7 +1,7 @@
 ---
 title: Sorgente Nossana
 order: 1
-summary: Visita guidata alla sorgente di Ponte Nossa e all'impianto di potabilizzazione.
+summary: Un viaggio per scoprire l'origine dell'acqua che arriva nelle nostre case.
 hero:
   type: image
   image:
@@ -11,17 +11,21 @@ cardImage:
   src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/card.jpg"
   alt: "Sorgente Nossana — anteprima visita didattica"
 intro: >
-  Una mattinata alla scoperta della sorgente di Ponte Nossa, punto di partenza
-  del ciclo dell'acqua Uniacque, e dell'impianto che rende l'acqua potabile.
+  C'è un punto preciso in cui l'acqua che arriva nelle nostre case inizia
+  il suo viaggio. È la Sorgente Nossana, a Ponte Nossa: qui il lavoro di
+  Uniacque comincia davvero, tra le rocce e la sorgente che alimenta
+  l'acquedotto.
 infoBoxes:
   - label: Dove
     value: "Via Sorgenti, Ponte Nossa (BG)"
   - label: Cosa include
-    value: "Accoglienza, visita alla sorgente, visita al potabilizzatore"
+    value: "Accoglienza e introduzione al ciclo dell'acqua, visita alla sorgente, visita alla fase di potabilizzazione"
   - label: Durata
-    value: "Una mattinata — max 2 classi / 50 bambini"
+    value: "Una mattinata, fino a 2 classi in contemporanea (max 50 bambini)"
   - label: Trasporto
-    value: "A carico dell'Istituto scolastico"
+    value: "A carico dell'Istituto"
+  - label: Iscrizioni
+    value: "Tramite portale dedicato, a partire da settembre"
 gallery:
   images:
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-01.jpg"
@@ -34,10 +38,16 @@ gallery:
       alt: "Studenti in visita all'impianto di potabilizzazione"
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-05.jpg"
       alt: "Momento della visita alla sorgente"
-note: "La visita può essere abbinata al Maglio Museo di Ponte Nossa."
+note: "Su richiesta, in abbinamento, è possibile prenotare autonomamente la visita al Maglio Museo, in prossimità della sorgente."
 seo:
   description: Visita didattica alla sorgente Nossana e all'impianto di potabilizzazione di Uniacque, per le scuole di Bergamo.
 ---
 
-Le iscrizioni si effettuano dal portale dell'area riservata. Per informazioni
-scrivi a educational@uniacque.bg.it.
+Portare le classi fin qui significa rendere concreto un concetto che a
+scuola resta spesso astratto: da dove viene l'acqua, chi se ne prende cura,
+quali passaggi la rendono potabile.
+
+## Come funziona
+
+Una mattinata alla sorgente, per vedere con i propri occhi il primo passo
+di un sistema che, ogni giorno, porta l'acqua a migliaia di famiglie.

@@ -5,8 +5,8 @@ export const site = {
     'Il portale educational di Uniacque: laboratori, visite guidate, formazione scuola-lavoro e area didattica per le scuole di Bergamo.',
   url: 'https://scuole.uniacque.bg.it',
   contactEmail: 'educational@uniacque.bg.it',
-  privacyUrl: 'https://www.uniacque.bg.it/privacy-policy',
-  cookieUrl: 'https://www.uniacque.bg.it/cookie-policy',
+  privacyUrl: 'https://www.uniacque.bg.it/privacy/',
+  cookieUrl: 'https://www.uniacque.bg.it/chi-siamo/cookie/',
   partner: {
     name: 'Skillherz',
     url: 'https://skillherz.com',

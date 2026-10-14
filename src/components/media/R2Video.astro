@@ -30,7 +30,7 @@ const posterUrl = poster ? r2Url(poster) : undefined;
 ---
 
 <video
-  class={className}
+  class={`object-cover ${className}`}
   src={videoUrl}
   poster={posterUrl}
   aria-label={alt}

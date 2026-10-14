@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { program } = Astro.props;
-const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo } = program.data;
+const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo, showAuthCta } = program.data;
 
 const illustrationMap: Record<string, string> = {
   'educational-center': '/illustrations/laboratory.png',
@@ -29,12 +29,14 @@ const hasBody = (program.body ?? '').trim().length > 0;
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
   <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero} illustration={illustration}>
-    <div class="mt-6 flex flex-wrap items-center gap-3">
-      <CtaPair />
-      {ctas.length > 0 && ctas.map((c) => (
-        <Button href={c.href} variant={c.variant}>{c.label}</Button>
-      ))}
-    </div>
+    {(showAuthCta || ctas.length > 0) && (
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        {showAuthCta && <CtaPair />}
+        {ctas.length > 0 && ctas.map((c) => (
+          <Button href={c.href} variant={c.variant}>{c.label}</Button>
+        ))}
+      </div>
+    )}
   </HeroCard>
 
   {hasBody && (

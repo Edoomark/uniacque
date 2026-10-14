@@ -51,6 +51,7 @@ const programs = defineCollection({
     intro: z.string().optional(),
     infoBoxes: z.array(infoBox).default([]),
     ctas: z.array(cta).default([]),
+    showAuthCta: z.boolean().default(true),
     gallery: z
       .object({
         images: z.array(mediaAsset).default([]),

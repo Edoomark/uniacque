@@ -1,7 +1,7 @@
 ---
 title: Formazione Scuola-Lavoro
 order: 4
-summary: Percorso PCTO per le secondarie di secondo grado, con produzione di materiali divulgativi sul tema dell'acqua.
+summary: Un percorso in cui i ragazzi delle scuole superiori entrano nel mondo del lavoro, imparando a raccontare l'acqua con le proprie parole.
 hero:
   type: image
   image:
@@ -11,16 +11,19 @@ cardImage:
   src: "Sezione Educational/Formazione Scuola-Lavoro/card.jpg"
   alt: "Formazione Scuola-Lavoro Uniacque — anteprima"
 intro: >
-  Un percorso di formazione scuola-lavoro per le superiori: 30 ore in cui
-  gli studenti producono materiali divulgativi (video, schede, contenuti
-  social) sui temi dell'acqua, destinati ad altri studenti.
+  Il nostro impegno coinvolge da sempre anche gli studenti più grandi. Nei
+  percorsi di Formazione Scuola-Lavoro, i ragazzi delle scuole superiori
+  lavorano sulle proprie competenze trasversali, traducendo contenuti
+  tecnico-scientifici sull'acqua in materiali divulgativi: video, schede,
+  contenuti social. Ma chi è il destinatario di questi materiali? I loro
+  colleghi studenti, ovviamente!
 infoBoxes:
   - label: Target
-    value: "Secondarie di secondo grado"
+    value: "Studenti delle scuole secondarie di secondo grado"
   - label: Formato
-    value: "30 ore / settimana con produzione finale"
+    value: "30 ore a settimana, con produzione finale di materiali divulgativi"
   - label: Iscrizioni
-    value: "Dal portale area riservata"
+    value: "Tramite portale dedicato"
 gallery:
   images: []
   videos:
@@ -64,6 +67,7 @@ seo:
   description: Formazione Scuola-Lavoro Uniacque — percorso PCTO per le superiori con produzione di materiali divulgativi sul tema dell'acqua.
 ---
 
-Gli studenti lavorano in team su un tema assegnato (acqua, sostenibilità,
-cambiamento climatico, parità di genere, innovazione) e producono contenuti
-divulgativi destinati ai loro coetanei.
+Non è quindi solo un modo per riportare alla mente vecchie nozioni
+sull'acqua: è un'occasione per entrare in contatto con il mondo della
+comunicazione e del racconto scientifico, allenando osservazione,
+creatività e capacità di spiegare in modo chiaro un tema complesso.

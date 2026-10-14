@@ -4,8 +4,18 @@ seo:
   description: Accedi all'area didattica Uniacque — prenotazioni, schede, video FSL, approfondimenti e materiali per docenti e studenti.
 ---
 
-L'**area didattica** è lo spazio riservato a docenti e studenti per accedere a
-prenotazioni, materiali e contenuti prodotti nell'ambito del progetto
-educational Uniacque.
+In questa pagina trovi i nostri **contenuti didattici**, pensati per
+**supportare la preparazione delle lezioni** e **approfondire i principali
+temi legati al ciclo dell'acqua**.
 
-Dopo l'accesso trovi risorse organizzate per tipo:
+Attraverso video e materiali di approfondimento, gli studenti scopriranno
+il percorso che l'acqua compie prima di arrivare nelle nostre case: dove
+nasce, come viene raccolta, resa potabile e distribuita grazie alle
+tecnologie utilizzate.
+
+Esploreranno inoltre il viaggio dell'acqua dopo il suo utilizzo,
+comprendendo come viene depurata prima di essere restituita all'ambiente
+e perché la tutela della risorsa idrica è fondamentale per costruire un
+rapporto sempre più sostenibile ed equilibrato tra attività umane e natura.
+
+Esplora le risorse, suddivise per tipologia:

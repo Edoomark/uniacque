@@ -1,7 +1,7 @@
 ---
 title: Educational Center
 order: 3
-summary: Spazio esperienziale a Cologno al Serio dedicato alle scuole primarie.
+summary: Uno spazio pensato per sporcarsi le mani, osservare e sperimentare il servizio idrico integrato.
 hero:
   type: image
   image:
@@ -11,18 +11,22 @@ cardImage:
   src: "Sezione Educational/Educational Center/card.jpg"
   alt: "Educational Center Uniacque — anteprima"
 intro: >
-  Uno spazio esperienziale a Cologno al Serio che racconta il viaggio
-  dell'acqua dal rubinetto al ritorno in ambiente, con un plastico
-  interattivo, video e quiz.
+  Non uno spazio narrativo, ma un luogo dove sporcarsi le mani, osservare,
+  sperimentare. È nato quasi per caso, da un sopralluogo in uno stabile
+  allora vuoto: oggi è l'Uniacque Educational Center, il luogo che racconta
+  il servizio idrico integrato dal rubinetto di casa fino al ritorno
+  dell'acqua in ambiente.
 infoBoxes:
   - label: Target
     value: "Scuole primarie"
   - label: Dove
-    value: "Educational Center, Cologno al Serio (BG)"
+    value: "Educational Center, Cologno al Serio"
   - label: Formato
-    value: "Visita guidata + laboratorio a gruppi"
+    value: "Visita guidata all'impianto di depurazione + attività di laboratorio a gruppi"
   - label: Accompagnamento
-    value: "2 ambassador Uniacque"
+    value: "Due ambassador Uniacque"
+  - label: Iscrizioni
+    value: "Tramite portale dedicato"
 gallery:
   images:
     - src: "Sezione Educational/Educational Center/gallery-01.jpg"
@@ -39,12 +43,18 @@ seo:
   description: Educational Center di Uniacque a Cologno al Serio — visita guidata e laboratorio per le scuole primarie.
 ---
 
+Ogni momento della visita è pensato per stimolare curiosità, riflessione
+e senso di responsabilità verso l'ambiente.
+
 ## Come funziona
 
-Due **ambassador Uniacque** accolgono le classi e le dividono in gruppi che
-ruotano tra due esperienze:
+Accompagnati da due ambassador Uniacque, gli studenti si dividono in
+gruppi: alternativamente visitano l'impianto di depurazione e svolgono
+un'**attività di laboratorio**, mettendo in pratica attraverso il gioco
+le nozioni imparate tra i banchi di scuola.
 
-- La **visita al depuratore** per vedere dove torna l'acqua usata
-- Il **laboratorio** in una stanza dedicata, con plastico, video e quiz
-
-Le iscrizioni si effettuano dal portale dell'area riservata.
+Non solo, tra le tappe del percorso c'è una stanza pensata per stupirli:
+al centro, un **plastico metavisuale** accompagna un video introduttivo
+che i ragazzi guardano insieme, per poi mettersi alla prova con quiz e
+attività legate a quanto hanno appena visto — un modo diverso per testare
+cosa hanno appena compreso e cristallizzare quelle conoscenze, giocando.
