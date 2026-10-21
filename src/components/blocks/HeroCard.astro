@@ -6,7 +6,7 @@ interface Props {
   title: string;
   eyebrow?: string;
   intro?: string;
-  hero: Parameters<typeof HeroMedia>[0]['hero'];
+  hero?: Parameters<typeof HeroMedia>[0]['hero'];
   illustration?: string;
 }
 
@@ -14,7 +14,19 @@ const { title, eyebrow, intro, hero, illustration } = Astro.props;
 ---
 
 <section class="relative h-screen min-h-[600px] max-h-[920px] overflow-hidden">
-  <HeroMedia hero={hero} rounded={false} class="absolute inset-0 h-full w-full" />
+  {hero ? (
+    <HeroMedia hero={hero} rounded={false} class="absolute inset-0 h-full w-full" />
+  ) : (
+    <div class="absolute inset-0 bg-primary">
+      <div
+        class="absolute inset-0 opacity-[0.08]"
+        style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 34px 34px;"
+        aria-hidden="true"
+      ></div>
+      <div class="pointer-events-none absolute -top-32 -left-24 h-96 w-96 rounded-full bg-primary-light opacity-50 blur-3xl"></div>
+      <div class="pointer-events-none absolute top-1/3 right-10 h-80 w-80 rounded-full bg-warm opacity-25 blur-3xl"></div>
+    </div>
+  )}
 
   <Container size="xl" class="relative z-10 flex h-full items-end pb-20 sm:pb-28">
     <div class="relative w-full max-w-2xl rounded-card bg-white p-6 sm:p-10 shadow-2xl ring-1 ring-accent/20">
@@ -33,10 +45,10 @@ const { title, eyebrow, intro, hero, illustration } = Astro.props;
           {eyebrow}
         </p>
       )}
-      <h1 class={`${eyebrow ? 'mt-3' : ''} font-display text-3xl sm:text-5xl font-bold text-primary leading-tight`}>
+      <h1 class={`${eyebrow ? 'mt-3' : ''} font-display text-3xl sm:text-5xl font-bold text-primary leading-tight text-balance`}>
         {title}
       </h1>
-      {intro && <p class="mt-4 max-w-xl text-lg text-ink-soft leading-relaxed">{intro}</p>}
+      {intro && <p class="mt-4 max-w-xl text-lg text-ink-soft leading-relaxed text-pretty">{intro}</p>}
       <slot />
     </div>
   </Container>

@@ -1,10 +1,12 @@
 ---
 import Video from '@components/media/Video.astro';
+import { streamPoster } from '@lib/stream';
 
 interface VideoItem {
   kind: 'stream' | 'r2' | 'youtube' | 'bunny';
   src: string;
   poster?: string;
+  posterTime?: string;
   alt: string;
 }
 
@@ -20,11 +22,22 @@ const gridCols = {
   2: 'sm:grid-cols-2',
   3: 'sm:grid-cols-2 lg:grid-cols-3',
 };
+
+const offsetTimes = ['3s', '7s', '11s', '15s', '19s', '23s', '5s', '9s', '13s', '17s', '21s', '25s'];
+
+const prepared = videos.map((v, i) => {
+  if (v.poster) return v;
+  if (v.kind === 'stream') {
+    const t = v.posterTime ?? offsetTimes[i % offsetTimes.length];
+    return { ...v, poster: streamPoster(v.src, t) };
+  }
+  return v;
+});
 ---
 
-{videos.length > 0 && (
+{prepared.length > 0 && (
   <div class={`grid gap-6 ${gridCols[columns]} ${className}`}>
-    {videos.map((v) => (
+    {prepared.map((v) => (
       <div>
         <Video video={v} class="rounded-box" />
         <p class="mt-2 text-sm text-ink-soft">{v.alt}</p>

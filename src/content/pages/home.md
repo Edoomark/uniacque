@@ -1,12 +1,12 @@
 ---
-title: Uniacque per le scuole
+title: Uniacque Educational
 hero:
   type: video
   video:
     kind: r2
     src: HP/hero.mp4
     poster: HP/hero-poster.jpg
-    alt: Video introduttivo Uniacque per le scuole
+    alt: Video introduttivo Uniacque Educational
 intro: >
   L'acqua è la materia della vita. Arriva nelle case, nelle scuole, nei gesti
   di ogni giorno e raramente ci si chiede da dove venga, o quali scelte la

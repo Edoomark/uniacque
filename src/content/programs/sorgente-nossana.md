@@ -39,6 +39,9 @@ gallery:
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Sorgente Nossana/gallery-05.jpg"
       alt: "Momento della visita alla sorgente"
 note: "Su richiesta, in abbinamento, è possibile prenotare autonomamente la visita al Maglio Museo, in prossimità della sorgente."
+howItWorks: >
+  Una mattinata alla sorgente, per vedere con i propri occhi il primo passo
+  di un sistema che, ogni giorno, porta l'acqua a migliaia di famiglie.
 seo:
   description: Visita didattica alla sorgente Nossana e all'impianto di potabilizzazione di Uniacque, per le scuole di Bergamo.
 ---
@@ -46,8 +49,3 @@ seo:
 Portare le classi fin qui significa rendere concreto un concetto che a
 scuola resta spesso astratto: da dove viene l'acqua, chi se ne prende cura,
 quali passaggi la rendono potabile.
-
-## Come funziona
-
-Una mattinata alla sorgente, per vedere con i propri occhi il primo passo
-di un sistema che, ogni giorno, porta l'acqua a migliaia di famiglie.

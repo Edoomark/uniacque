@@ -1,6 +1,6 @@
 export const site = {
-  name: 'Uniacque per le scuole',
-  shortName: 'Uniacque Edu',
+  name: 'Uniacque Educational',
+  shortName: 'Uniacque Educational',
   description:
     'Il portale educational di Uniacque: laboratori, visite guidate, formazione scuola-lavoro e area didattica per le scuole di Bergamo.',
   url: 'https://scuole.uniacque.bg.it',

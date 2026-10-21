@@ -1,0 +1,33 @@
+---
+import Container from '@components/ui/Container.astro';
+
+interface Props {
+  text: string;
+  heading?: string;
+  class?: string;
+}
+
+const { text, heading = 'Come funziona', class: className = '' } = Astro.props;
+
+const paragraphs = text
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter((p) => p.length > 0);
+---
+
+<section class={`py-10 sm:py-14 ${className}`}>
+  <Container size="lg">
+    <div class="relative overflow-hidden rounded-card bg-accent-cloud p-8 sm:p-12 ring-1 ring-accent/40">
+      <div class="pointer-events-none absolute -top-24 -right-20 h-56 w-56 rounded-full bg-warm/10 blur-3xl"></div>
+      <div class="relative">
+        <div class="flex items-center gap-3">
+          <span class="inline-block h-1 w-10 rounded-full bg-warm"></span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-primary">{heading}</h2>
+        </div>
+        <div class="mt-5 space-y-4 text-lg leading-relaxed text-ink">
+          {paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

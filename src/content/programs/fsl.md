@@ -63,11 +63,11 @@ gallery:
     - kind: stream
       src: 66d61f8a2c52fbb118456f58094f6155
       alt: "Reality — Istituto Weil"
+howItWorks: >
+  Non è quindi solo un modo per riportare alla mente vecchie nozioni
+  sull'acqua: è un'occasione per entrare in contatto con il mondo della
+  comunicazione e del racconto scientifico, allenando osservazione,
+  creatività e capacità di spiegare in modo chiaro un tema complesso.
 seo:
   description: Formazione Scuola-Lavoro Uniacque — percorso PCTO per le superiori con produzione di materiali divulgativi sul tema dell'acqua.
 ---
-
-Non è quindi solo un modo per riportare alla mente vecchie nozioni
-sull'acqua: è un'occasione per entrare in contatto con il mondo della
-comunicazione e del racconto scientifico, allenando osservazione,
-creatività e capacità di spiegare in modo chiaro un tema complesso.

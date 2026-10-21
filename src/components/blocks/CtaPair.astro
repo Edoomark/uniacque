@@ -6,20 +6,25 @@ interface Props {
   loginLabel?: string;
   registerLabel?: string;
   class?: string;
+  onDark?: boolean;
 }
 
 const {
   loginLabel = 'Accedi',
   registerLabel = 'Registrati',
   class: className = '',
+  onDark = false,
 } = Astro.props;
+
+const loginVariant = onDark ? 'primary-on-dark' : 'primary';
+const registerVariant = onDark ? 'secondary-on-dark' : 'secondary';
 ---
 
 <div class={`flex flex-wrap gap-3 ${className}`}>
-  <Button href={auth.login} variant="primary" external>
+  <Button href={auth.login} variant={loginVariant} external>
     {loginLabel}
   </Button>
-  <Button href={auth.register} variant="secondary" external>
+  <Button href={auth.register} variant={registerVariant} external>
     {registerLabel}
   </Button>
 </div>

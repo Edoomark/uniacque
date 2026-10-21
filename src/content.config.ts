@@ -13,6 +13,7 @@ const videoAsset = z.object({
   kind: z.enum(['stream', 'r2', 'youtube', 'bunny']),
   src: z.string(),
   poster: z.string().optional(),
+  posterTime: z.string().optional(),
   alt: z.string(),
 });
 
@@ -59,7 +60,9 @@ const programs = defineCollection({
       })
       .optional(),
     note: z.string().optional(),
+    howItWorks: z.string().optional(),
     contactEmail: z.string().email().optional(),
+    contactBlurb: z.string().optional(),
     seo,
   }),
 });

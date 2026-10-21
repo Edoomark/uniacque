@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
+import HowItWorks from '@components/blocks/HowItWorks.astro';
 import InfoBoxGrid from '@components/blocks/InfoBoxGrid.astro';
 import CtaPair from '@components/blocks/CtaPair.astro';
 import Gallery from '@components/blocks/Gallery.astro';
@@ -14,30 +15,43 @@ interface Props {
 }
 
 const { program } = Astro.props;
-const { title, hero, intro, infoBoxes, ctas, gallery, note, contactEmail, seo, showAuthCta } = program.data;
+const {
+  title,
+  hero,
+  intro,
+  infoBoxes,
+  ctas,
+  gallery,
+  note,
+  howItWorks,
+  contactEmail,
+  contactBlurb,
+  seo,
+  showAuthCta,
+} = program.data;
 
 const illustrationMap: Record<string, string> = {
-  'educational-center': '/illustrations/laboratory.png',
+  'educational-center': '/illustrations/mc-persona-v2.png',
   'fsl': '/illustrations/roboto.png',
-  'missione-comune': '/illustrations/mc-rubinetto.png',
-  'sorgente-nossana': '/illustrations/design-science.png',
+  'missione-comune': '/illustrations/mc-palazzo-v2.png',
+  'sorgente-nossana': '/illustrations/mc-rubinetto-v2.png',
 };
 const illustration = illustrationMap[program.id];
 
 const hasBody = (program.body ?? '').trim().length > 0;
+const hasExtraCtas = ctas.length > 0;
+const hasAuthCta = showAuthCta || hasExtraCtas;
+
+const emailLinkHtml = contactBlurb && contactEmail
+  ? contactBlurb.replace(
+      contactEmail,
+      `<a href="mailto:${contactEmail}" class="font-semibold text-warm-soft underline decoration-warm/50 underline-offset-4 hover:text-white">${contactEmail}</a>`,
+    )
+  : null;
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero} illustration={illustration}>
-    {(showAuthCta || ctas.length > 0) && (
-      <div class="mt-6 flex flex-wrap items-center gap-3">
-        {showAuthCta && <CtaPair />}
-        {ctas.length > 0 && ctas.map((c) => (
-          <Button href={c.href} variant={c.variant}>{c.label}</Button>
-        ))}
-      </div>
-    )}
-  </HeroCard>
+  <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero} illustration={illustration} />
 
   {hasBody && (
     <section class="py-14 sm:py-20">
@@ -48,6 +62,8 @@ const hasBody = (program.body ?? '').trim().length > 0;
       </Container>
     </section>
   )}
+
+  {howItWorks && <HowItWorks text={howItWorks} />}
 
   {infoBoxes.length > 0 && (
     <section class="pb-10 sm:pb-14">
@@ -67,22 +83,41 @@ const hasBody = (program.body ?? '').trim().length > 0;
     </section>
   )}
 
-  {contactEmail && (
+  {(contactBlurb || contactEmail) && (
     <section class="pb-14 sm:pb-20">
       <Container size="lg">
         <div class="relative overflow-hidden rounded-card bg-primary p-6 sm:p-8 text-white shadow-lg">
           <div class="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-warm/15 blur-2xl"></div>
-          <div class="relative flex flex-wrap items-center justify-between gap-4">
-            <p class="text-base sm:text-lg text-white/90">
-              Per informazioni scrivi a
-              <a
-                href={`mailto:${contactEmail}`}
-                class="ml-1 inline-flex items-center gap-1 font-semibold text-warm-soft underline decoration-warm/50 underline-offset-4 hover:text-white"
-              >
-                {contactEmail}
-              </a>
-            </p>
+          <div class="relative">
+            {emailLinkHtml ? (
+              <p class="text-base sm:text-lg leading-relaxed text-white/90" set:html={emailLinkHtml} />
+            ) : contactBlurb ? (
+              <p class="text-base sm:text-lg leading-relaxed text-white/90">{contactBlurb}</p>
+            ) : (
+              <p class="text-base sm:text-lg text-white/90">
+                Per informazioni scrivi a
+                <a
+                  href={`mailto:${contactEmail}`}
+                  class="ml-1 inline-flex items-center gap-1 font-semibold text-warm-soft underline decoration-warm/50 underline-offset-4 hover:text-white"
+                >
+                  {contactEmail}
+                </a>
+              </p>
+            )}
           </div>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {hasAuthCta && (
+    <section class="pb-10 sm:pb-14">
+      <Container size="lg">
+        <div class="flex flex-wrap items-center gap-3">
+          {showAuthCta && <CtaPair />}
+          {hasExtraCtas && ctas.map((c) => (
+            <Button href={c.href} variant={c.variant}>{c.label}</Button>
+          ))}
         </div>
       </Container>
     </section>

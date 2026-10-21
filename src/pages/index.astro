@@ -3,7 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import HomeFeatureCard from '@components/blocks/HomeFeatureCard.astro';
 import ContactForm from '@components/blocks/ContactForm.astro';
 import Container from '@components/ui/Container.astro';
-import HeroMedia from '@components/blocks/HeroMedia.astro';
+import HeroCard from '@components/blocks/HeroCard.astro';
 import { getEntry, render } from 'astro:content';
 
 const page = await getEntry('pages', 'home');
@@ -22,31 +22,12 @@ const illustrationMap: Record<string, string> = {
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  <section class="relative h-screen min-h-[600px] max-h-[920px] overflow-hidden">
-    {hero && (
-      <HeroMedia
-        hero={hero}
-        rounded={false}
-        class="absolute inset-0 h-full w-full"
-      />
-    )}
-
-    <!-- Scrim per leggibilità del testo in overlay in basso -->
-    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/90 via-primary/55 to-transparent"></div>
-
-    <Container size="xl" class="relative z-10 flex h-full items-end pb-20 sm:pb-28 lg:pb-32">
-      <div class="max-w-2xl text-white">
-        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
-          {title}
-        </h1>
-        {intro && (
-          <p class="mt-6 max-w-xl text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed">
-            {intro}
-          </p>
-        )}
-      </div>
-    </Container>
-  </section>
+  <HeroCard
+    title={title}
+    intro={intro}
+    hero={hero}
+    illustration="/illustrations/mc-persona-v2.png"
+  />
 
   {hasBody && (
     <Container size="lg" class="py-12 prose prose-lg max-w-none">

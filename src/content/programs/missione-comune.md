@@ -38,7 +38,23 @@ gallery:
       alt: "Classe durante la sfida della gestione idrica"
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-06.jpg"
       alt: "Momento conclusivo del laboratorio"
+howItWorks: >
+  La classe diventa una centrale operativa e ogni gruppo il gestore
+  dell'acqua del proprio Comune, chiamato ad affrontare tre sfide:
+  progettare un sistema idrico scegliendo dove farlo arrivare, reagire a un
+  imprevisto sul campo e infine scrivere un'ordinanza invitando i cittadini
+  a comportamenti sostenibili.
+
+
+  Al termine dell'attività, alla classe viene chiesto di scegliere insieme
+  un piccolo gesto "ecologico" da adottare da subito: il primo passo nel
+  passaggio da spettatori a cittadini attivi.
 contactEmail: educational@uniacque.bg.it
+contactBlurb: >
+  Il laboratorio viene proposto gratuitamente a un gruppo selezionato di
+  classi, nei Comuni soci di Uniacque: a inizio anno scolastico i Comuni
+  coinvolti verranno contattati direttamente per organizzare l'attività.
+  Per ulteriori informazioni è possibile scrivere a educational@uniacque.bg.it.
 seo:
   description: Missione Comune — laboratorio didattico Uniacque per le secondarie di primo grado, in collaborazione con scuole e comuni.
 ---
@@ -55,19 +71,3 @@ bene comune e rendendo l'apprendimento un'esperienza concreta e partecipata.
 primo grado, porta un nome così preciso: **Missione Comune**. *Comune*
 come istituzione e territorio, ma anche come comunità di persone che
 condividono risorse, responsabilità e scelte per il futuro.
-
-## Come funziona
-
-La classe diventa una centrale operativa e ogni gruppo il gestore
-dell'acqua del proprio Comune, chiamato ad affrontare tre sfide:
-progettare un sistema idrico scegliendo dove farlo arrivare, reagire a un
-imprevisto sul campo e infine scrivere un'ordinanza invitando i cittadini
-a comportamenti sostenibili.
-
-Al termine dell'attività, alla classe viene chiesto di scegliere insieme
-un piccolo gesto "ecologico" da adottare da subito: il primo passo nel
-passaggio da spettatori a cittadini attivi.
-
-Il laboratorio viene proposto gratuitamente a un gruppo selezionato di
-classi, nei Comuni soci di Uniacque: a inizio anno scolastico i Comuni
-coinvolti verranno contattati direttamente per organizzare l'attività.
