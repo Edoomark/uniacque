@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
 import Gallery from '@components/blocks/Gallery.astro';
-import InfoBoxGrid from '@components/blocks/InfoBoxGrid.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
@@ -16,24 +15,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const { edition } = Astro.props as { edition: CollectionEntry<'waterEditions'> };
-const { title, hero, weeks, themes, format, jury, prize, gallery, note, seo } = edition.data;
+const { title, hero, gallery, note, seo } = edition.data;
 const { Content } = await render(edition);
 const hasBody = (edition.body ?? '').trim().length > 0;
-
-const infoBoxes = [
-  weeks ? { label: 'Durata', value: `${weeks} settimane` } : null,
-  themes.length > 0 ? { label: 'Temi', value: themes.join(' · ') } : null,
-  format.length > 0 ? { label: 'Format', value: format.join(' · ') } : null,
-  jury ? { label: 'Giuria', value: jury } : null,
-  prize ? { label: 'Premio', value: prize } : null,
-].filter((x): x is { label: string; value: string } => x !== null);
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
   <HeroCard title={title} eyebrow="Water School" hero={hero} illustration="/illustrations/vr.png" />
 
   {hasBody && (
-    <section class="py-14 sm:py-20">
+    <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="lg">
         <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
           <Content />
@@ -42,16 +33,8 @@ const infoBoxes = [
     </section>
   )}
 
-  {infoBoxes.length > 0 && (
-    <section class="pb-10 sm:pb-14">
-      <Container size="lg">
-        <InfoBoxGrid items={infoBoxes} />
-      </Container>
-    </section>
-  )}
-
   {note && (
-    <section class="pb-10">
+    <section class="pb-10 bg-accent-cloud">
       <Container size="lg">
         <div class="rounded-card bg-warm-soft/60 p-5 sm:p-6 text-ink ring-1 ring-warm/20">{note}</div>
       </Container>

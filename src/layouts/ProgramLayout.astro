@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
-import HowItWorks from '@components/blocks/HowItWorks.astro';
 import InfoBoxGrid from '@components/blocks/InfoBoxGrid.astro';
 import CtaPair from '@components/blocks/CtaPair.astro';
 import Gallery from '@components/blocks/Gallery.astro';
@@ -41,6 +40,11 @@ const illustration = illustrationMap[program.id];
 const hasBody = (program.body ?? '').trim().length > 0;
 const hasExtraCtas = ctas.length > 0;
 const hasAuthCta = showAuthCta || hasExtraCtas;
+const hasComeFunziona = Boolean(howItWorks) || infoBoxes.length > 0;
+
+const howItWorksParagraphs = howItWorks
+  ? howItWorks.split(/\n\s*\n/).map((p) => p.trim()).filter((p) => p.length > 0)
+  : [];
 
 const emailLinkHtml = contactBlurb && contactEmail
   ? contactBlurb.replace(
@@ -51,30 +55,44 @@ const emailLinkHtml = contactBlurb && contactEmail
 ---
 
 <BaseLayout title={title} description={seo.description} ogImage={seo.ogImage}>
-  <HeroCard title={title} eyebrow="Educational" intro={intro} hero={hero} illustration={illustration} />
+  <HeroCard title={title} eyebrow="Educational" hero={hero} illustration={illustration} />
 
-  {hasBody && (
+  {(intro || hasBody) && (
     <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="lg">
         <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
-          <slot />
+          {intro && <p>{intro}</p>}
+          {hasBody && <slot />}
         </article>
       </Container>
     </section>
   )}
 
-  {howItWorks && <HowItWorks text={howItWorks} />}
-
-  {infoBoxes.length > 0 && (
-    <section class="pb-10 sm:pb-14">
+  {hasComeFunziona && (
+    <section class="py-10 sm:py-14 bg-accent-cloud">
       <Container size="lg">
-        <InfoBoxGrid items={infoBoxes} />
+        <div class="relative overflow-hidden rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30">
+          <div class="flex items-center gap-3">
+            <span class="inline-block h-1 w-10 rounded-full bg-warm"></span>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-primary">Come funziona</h2>
+          </div>
+          {howItWorksParagraphs.length > 0 && (
+            <div class="mt-5 space-y-4 text-lg leading-relaxed text-ink">
+              {howItWorksParagraphs.map((p) => <p>{p}</p>)}
+            </div>
+          )}
+          {infoBoxes.length > 0 && (
+            <div class="mt-6">
+              <InfoBoxGrid items={infoBoxes} />
+            </div>
+          )}
+        </div>
       </Container>
     </section>
   )}
 
   {note && (
-    <section class="pb-10">
+    <section class="pb-10 bg-accent-cloud">
       <Container size="lg">
         <div class="rounded-card bg-warm-soft/60 p-5 sm:p-6 text-ink ring-1 ring-warm/20">
           {note}
@@ -84,7 +102,7 @@ const emailLinkHtml = contactBlurb && contactEmail
   )}
 
   {(contactBlurb || contactEmail) && (
-    <section class="pb-14 sm:pb-20">
+    <section class="pb-14 sm:pb-20 bg-accent-cloud">
       <Container size="lg">
         <div class="relative overflow-hidden rounded-card bg-primary p-6 sm:p-8 text-white shadow-lg">
           <div class="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-warm/15 blur-2xl"></div>
@@ -111,7 +129,7 @@ const emailLinkHtml = contactBlurb && contactEmail
   )}
 
   {hasAuthCta && (
-    <section class="pb-10 sm:pb-14">
+    <section class="pb-10 sm:pb-14 bg-accent-cloud">
       <Container size="lg">
         <div class="flex flex-wrap items-center gap-3">
           {showAuthCta && <CtaPair />}
@@ -133,7 +151,7 @@ const emailLinkHtml = contactBlurb && contactEmail
   )}
 
   {gallery?.videos && gallery.videos.length > 0 && (
-    <section class="py-14 sm:py-20">
+    <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="xl">
         <h2 class="mb-8 font-display text-2xl sm:text-3xl font-bold text-primary">Video</h2>
         <VideoGallery videos={gallery.videos} columns={2} />

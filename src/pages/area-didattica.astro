@@ -46,42 +46,74 @@ const resources = [
   <HeroCard
     title={title}
     eyebrow="Area riservata"
-    intro={intro}
-    illustration="/illustrations/graduation.png"
-  >
-    <CtaPair class="mt-6" onDark={false} />
-  </HeroCard>
+    illustration="/illustrations/mc-eolica.png"
+  />
 
-  {/* TODO: gating post-login — definire con Giulia cosa deve essere riservato */}
-  <section class="bg-accent-cloud py-14 sm:py-20">
+  <section class="py-14 sm:py-20 bg-accent-cloud">
     <Container size="lg">
       <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
-        <Content />
+        <p>{intro}</p>
       </article>
-    </Container>
-  </section>
-
-  <section class="bg-accent-cloud py-14 sm:py-20">
-    <Container size="lg">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {resources.map((r) => (
-          <article class="group relative flex flex-col items-start gap-5 rounded-card bg-white p-7 shadow-sm ring-1 ring-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-            <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-primary/10">
-              <img
-                src={r.icon}
-                alt=""
-                class="h-11 w-11 object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            </span>
-            <div>
-              <h3 class="font-display text-xl font-bold text-primary">{r.title}</h3>
-              <p class="mt-2 text-ink-soft leading-relaxed">{r.description}</p>
-            </div>
-          </article>
-        ))}
+      <div class="mt-6 flex justify-center" data-auth-cta>
+        <CtaPair />
       </div>
     </Container>
   </section>
+
+  <!-- Contenuto riservato: visibile solo post accesso -->
+  <div id="auth-gated" hidden>
+    <section class="py-14 sm:py-20 bg-accent-cloud">
+      <Container size="lg">
+        <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-primary mt-0">Risorse</h2>
+          <Content />
+        </article>
+      </Container>
+    </section>
+
+    <section class="bg-accent-cloud pb-20">
+      <Container size="lg">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {resources.map((r) => (
+            <article class="group relative flex flex-col items-start gap-5 rounded-card bg-white p-7 shadow-sm ring-1 ring-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-primary/10">
+                <img
+                  src={r.icon}
+                  alt=""
+                  class="h-11 w-11 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <div>
+                <h3 class="font-display text-xl font-bold text-primary">{r.title}</h3>
+                <p class="mt-2 text-ink-soft leading-relaxed">{r.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  const AUTH_KEY = 'uniacque_auth';
+  const gated = document.getElementById('auth-gated');
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('auth') === '1') {
+    try { localStorage.setItem(AUTH_KEY, '1'); } catch {}
+  }
+
+  let authed = false;
+  try { authed = localStorage.getItem(AUTH_KEY) === '1'; } catch {}
+  if (authed && gated) gated.hidden = false;
+
+  // Intercetta i bottoni Accedi/Registrati: salva il flag prima del redirect esterno.
+  document.querySelectorAll('[data-auth-cta] a').forEach((a) => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem(AUTH_KEY, '1'); } catch {}
+    });
+  });
+</script>

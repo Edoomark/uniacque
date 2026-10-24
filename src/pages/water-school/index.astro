@@ -20,17 +20,17 @@ const editions = (await getCollection('waterEditions')).sort(
   {hero && (
     <HeroCard
       title={title}
-      intro={intro}
       hero={hero}
       illustration="/illustrations/vr.png"
     />
   )}
 
-  {hasBody && (
+  {(intro || hasBody) && (
     <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="lg">
         <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
-          <Content />
+          {intro && <p>{intro}</p>}
+          {hasBody && <Content />}
         </article>
       </Container>
     </section>
