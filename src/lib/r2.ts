@@ -9,7 +9,8 @@ export function r2Url(path: string): string {
   if (!path) return '';
   if (/^https?:\/\//.test(path)) return path;
   const clean = path.replace(/^\/+/, '');
-  return BASE ? `${BASE}/${clean}` : `/${clean}`;
+  const encoded = clean.split('/').map(encodeURIComponent).join('/');
+  return BASE ? `${BASE}/${encoded}` : `/${encoded}`;
 }
 
 interface CfImageOptions {
