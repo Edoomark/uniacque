@@ -13,7 +13,7 @@ cardImage:
 intro: >
   Il nostro impegno coinvolge da sempre anche gli studenti più grandi. Nei
   percorsi di Formazione Scuola-Lavoro, i ragazzi delle scuole superiori
-  lavorano sulle proprie competenze trasversali, traducendo contenuti
+  lavorano sulle proprie <strong>competenze trasversali</strong>, traducendo contenuti
   tecnico-scientifici sull'acqua in materiali divulgativi: video, schede,
   contenuti social. Ma chi è il destinatario di questi materiali? I loro
   colleghi studenti, ovviamente!
