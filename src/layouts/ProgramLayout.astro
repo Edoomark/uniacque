@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import HeroCard from '@components/blocks/HeroCard.astro';
 import InfoBoxGrid from '@components/blocks/InfoBoxGrid.astro';
-import CtaPair from '@components/blocks/CtaPair.astro';
+import AuthCtaCard from '@components/blocks/AuthCtaCard.astro';
 import Gallery from '@components/blocks/Gallery.astro';
 import VideoGallery from '@components/blocks/VideoGallery.astro';
 import Container from '@components/ui/Container.astro';
@@ -131,12 +131,14 @@ const emailLinkHtml = contactBlurb && contactEmail
   {hasAuthCta && (
     <section class="pb-10 sm:pb-14 bg-accent-cloud">
       <Container size="lg">
-        <div class="flex flex-wrap items-center gap-3">
-          {showAuthCta && <CtaPair />}
-          {hasExtraCtas && ctas.map((c) => (
-            <Button href={c.href} variant={c.variant}>{c.label}</Button>
-          ))}
-        </div>
+        {showAuthCta && <AuthCtaCard />}
+        {hasExtraCtas && (
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {ctas.map((c) => (
+              <Button href={c.href} variant={c.variant}>{c.label}</Button>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   )}

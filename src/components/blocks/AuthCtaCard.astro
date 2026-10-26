@@ -1,0 +1,32 @@
+---
+import CtaPair from './CtaPair.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`mx-auto flex max-w-md flex-col items-center gap-5 rounded-card bg-white px-6 py-7 sm:px-8 sm:py-8 shadow-lg ring-1 ring-accent/30 ${className}`}>
+  <span
+    aria-hidden="true"
+    class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-md ring-4 ring-accent-cloud"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-7 w-7"
+    >
+      <rect x="4" y="11" width="16" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+      <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  </span>
+  <CtaPair class="justify-center" />
+</div>
