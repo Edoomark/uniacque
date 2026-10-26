@@ -61,7 +61,7 @@ const emailLinkHtml = contactBlurb && contactEmail
     <section class="py-14 sm:py-20 bg-accent-cloud">
       <Container size="lg">
         <article class="relative rounded-card bg-white p-8 sm:p-12 shadow-lg ring-1 ring-accent/30 prose prose-lg max-w-none">
-          {intro && <p>{intro}</p>}
+          {intro && <p set:html={intro} />}
           {hasBody && <slot />}
         </article>
       </Container>
@@ -78,7 +78,7 @@ const emailLinkHtml = contactBlurb && contactEmail
           </div>
           {howItWorksParagraphs.length > 0 && (
             <div class="mt-5 space-y-4 text-lg leading-relaxed text-ink">
-              {howItWorksParagraphs.map((p) => <p>{p}</p>)}
+              {howItWorksParagraphs.map((p) => <p set:html={p} />)}
             </div>
           )}
           {infoBoxes.length > 0 && (

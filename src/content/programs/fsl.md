@@ -66,3 +66,8 @@ gallery:
 seo:
   description: Formazione Scuola-Lavoro Uniacque — percorso PCTO per le superiori con produzione di materiali divulgativi sul tema dell'acqua.
 ---
+
+Non è quindi solo un modo per riportare alla mente vecchie nozioni
+sull'acqua: è un'occasione per entrare in contatto con il mondo della
+comunicazione e del racconto scientifico, allenando osservazione,
+creatività e capacità di spiegare in modo chiaro un tema complesso.

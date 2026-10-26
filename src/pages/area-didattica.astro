@@ -98,8 +98,11 @@ const resources = [
 </BaseLayout>
 
 <script>
-  const AUTH_KEY = 'uniacque_auth';
+  const AUTH_KEY = 'uniacque_auth_v2';
+  const LEGACY_KEY = 'uniacque_auth';
   const gated = document.getElementById('auth-gated');
+
+  try { localStorage.removeItem(LEGACY_KEY); } catch {}
 
   const params = new URLSearchParams(window.location.search);
   if (params.get('auth') === '1') {
@@ -109,11 +112,4 @@ const resources = [
   let authed = false;
   try { authed = localStorage.getItem(AUTH_KEY) === '1'; } catch {}
   if (authed && gated) gated.hidden = false;
-
-  // Intercetta i bottoni Accedi/Registrati: salva il flag prima del redirect esterno.
-  document.querySelectorAll('[data-auth-cta] a').forEach((a) => {
-    a.addEventListener('click', () => {
-      try { localStorage.setItem(AUTH_KEY, '1'); } catch {}
-    });
-  });
 </script>

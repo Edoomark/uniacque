@@ -42,15 +42,16 @@ gallery:
 howItWorks: >
   Accompagnati da due ambassador Uniacque, gli studenti si dividono in
   gruppi: alternativamente visitano l'impianto di depurazione e svolgono
-  un'attività di laboratorio, mettendo in pratica attraverso il gioco
-  le nozioni imparate tra i banchi di scuola.
+  un'<strong>attività di laboratorio</strong>, mettendo in pratica
+  attraverso il gioco le nozioni imparate tra i banchi di scuola.
 
 
   Non solo, tra le tappe del percorso c'è una stanza pensata per stupirli:
-  al centro, un plastico metavisuale accompagna un video introduttivo
-  che i ragazzi guardano insieme, per poi mettersi alla prova con quiz e
-  attività legate a quanto hanno appena visto — un modo diverso per testare
-  cosa hanno appena compreso e cristallizzare quelle conoscenze, giocando.
+  al centro, un <strong>plastico metavisuale</strong> accompagna un video
+  introduttivo che i ragazzi guardano insieme, per poi mettersi alla prova
+  con quiz e attività legate a quanto hanno appena visto — un modo diverso
+  per testare cosa hanno appena compreso e cristallizzare quelle
+  conoscenze, giocando.
 seo:
   description: Educational Center di Uniacque a Cologno al Serio — visita guidata e laboratorio per le scuole primarie.
 ---
