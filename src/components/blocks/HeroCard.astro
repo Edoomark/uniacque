@@ -13,7 +13,7 @@ interface Props {
 const { title, eyebrow, intro, hero, illustration } = Astro.props;
 ---
 
-<section class="relative h-screen min-h-[600px] max-h-[920px] overflow-hidden">
+<section class="relative h-[80svh] min-h-[480px] max-h-[720px] sm:h-screen sm:min-h-[600px] sm:max-h-[920px] overflow-hidden">
   {hero ? (
     <HeroMedia hero={hero} rounded={false} class="absolute inset-0 h-full w-full" />
   ) : (
@@ -28,7 +28,7 @@ const { title, eyebrow, intro, hero, illustration } = Astro.props;
     </div>
   )}
 
-  <Container size="xl" class="relative z-10 flex h-full items-end pb-20 sm:pb-28">
+  <Container size="xl" class="relative z-10 flex h-full items-end pb-10 sm:pb-28">
     <div class="relative w-full max-w-2xl rounded-card bg-white p-6 sm:p-10 shadow-2xl ring-1 ring-accent/20">
       {illustration && (
         <img
