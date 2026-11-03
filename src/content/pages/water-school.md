@@ -1,5 +1,5 @@
 ---
-title: Water School
+title: WaterSchool
 hero:
   type: image
   image:

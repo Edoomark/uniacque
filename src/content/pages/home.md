@@ -21,7 +21,7 @@ features:
       label: Scopri di più
       href: /educational
       variant: primary
-  - title: Water School
+  - title: WaterSchool
     description: L'evento annuale che mette al centro la voce dei ragazzi.
     image:
       src: HP/box-water-school.jpg

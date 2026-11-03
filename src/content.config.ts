@@ -73,6 +73,7 @@ const waterEditions = defineCollection({
     year: z.number(),
     title: z.string(),
     summary: z.string(),
+    intro: z.string().optional(),
     hero,
     weeks: z.number().optional(),
     themes: z.array(z.string()).default([]),

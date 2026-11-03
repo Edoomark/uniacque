@@ -16,7 +16,7 @@ export const site = {
 
 export const nav = [
   { label: 'Educational', href: '/educational' },
-  { label: 'Water School', href: '/water-school' },
+  { label: 'WaterSchool', href: '/water-school' },
   { label: 'Area didattica', href: '/area-didattica' },
   { label: 'News', href: '/news' },
   { label: 'Contattaci', href: '#contatti' },
