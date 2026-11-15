@@ -25,6 +25,8 @@ infoBoxes:
     value: "Visita guidata all'impianto di depurazione + attività di laboratorio a gruppi"
   - label: Accompagnamento
     value: "Due ambassador Uniacque"
+  - label: Costi
+    value: "L'attività è gratuita"
   - label: Iscrizioni
     value: "Tramite portale dedicato"
 gallery:

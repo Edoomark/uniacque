@@ -22,6 +22,8 @@ infoBoxes:
     value: "Studenti delle scuole secondarie di secondo grado"
   - label: Formato
     value: "30 ore a settimana, con produzione finale di materiali divulgativi"
+  - label: Costi
+    value: "L'attività è gratuita"
   - label: Iscrizioni
     value: "Tramite portale dedicato"
 gallery:

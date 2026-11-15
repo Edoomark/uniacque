@@ -24,6 +24,8 @@ infoBoxes:
     value: "In classe"
   - label: Formato
     value: "Laboratorio in tre sfide"
+  - label: Costi
+    value: "L'attività è gratuita"
 gallery:
   images:
     - src: "Sezione Educational/Formazione Scuola-Lavoro/Missione Comune/gallery-01.jpg"
@@ -52,8 +54,9 @@ howItWorks: >
 contactEmail: educational@uniacque.bg.it
 contactBlurb: >
   Il laboratorio viene proposto gratuitamente a un gruppo selezionato di
-  classi, nei Comuni soci di Uniacque: a inizio anno scolastico i Comuni
-  coinvolti verranno contattati direttamente per organizzare l'attività.
+  classi, nei Comuni soci di Uniacque: a inizio anno scolastico tutti i
+  Comuni soci verranno contattati da Uniacque e potranno presentare la
+  propria intenzione ad aderire.
   Per ulteriori informazioni è possibile scrivere a educational@uniacque.bg.it.
 seo:
   description: Missione Comune — laboratorio didattico Uniacque per le secondarie di primo grado, in collaborazione con scuole e comuni.

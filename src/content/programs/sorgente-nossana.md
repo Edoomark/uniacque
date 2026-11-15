@@ -24,6 +24,8 @@ infoBoxes:
     value: "Una mattinata, fino a 2 classi in contemporanea (max 50 bambini)"
   - label: Trasporto
     value: "A carico dell'Istituto"
+  - label: Costi
+    value: "L'attività è gratuita"
   - label: Iscrizioni
     value: "Tramite portale dedicato, a partire da settembre"
 gallery:
