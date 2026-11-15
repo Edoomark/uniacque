@@ -9,23 +9,19 @@ cliente) e task post-lancio.
 
 ## 🔴 Blocker esterni (in attesa di terzi)
 
-- [ ] **DNS `uniacque.bg.it`** — decisione lato Uniacque arrivata il 2026-10-02.
-      Modello adottato = **Opzione 3** (record puntuali). Andrea Gamba
-      (`andrea.gamba@uniacque.bg.it`, Uniacque Digitalizzazione e Sistemi
-      Informativi) ha **rifiutato subdomain delegation** per sicurezza/governance:
-      ogni record (CNAME/TXT/MX) va chiesto puntualmente a lui, che lo inserisce
-      sul DNS autoritativo.
-      **Prossimi step bloccanti:**
-  1. **Antonio Sarti Deponti sceglie il nome del subdomain** (`educational.*`
-     oppure `scuole.*` o altro) — spetta a Uniacque Comunicazione.
-  2. Preparare email ad **Andrea Gamba** (cc Antonio) con l'elenco esatto
-     dei record da inserire, in base al subdomain scelto:
-     - `CNAME <subdomain>.uniacque.bg.it → uniacque-scuole.pages.dev`
-     - (opzionale CDN R2) `CNAME cdn.<subdomain>.uniacque.bg.it → bucket R2 custom hostname`
-     - (opzionale Resend) record SPF/DKIM/MX per invio da `no-reply@<subdomain>.uniacque.bg.it`
-  3. Dopo l'inserimento, collegare custom domain in Cloudflare Pages +
-     aggiornare `astro.config.mjs` se il subdomain scelto è diverso da
-     `scuole.uniacque.bg.it`.
+- [ ] **DNS `uniacque.bg.it`** — Opzione 3 (record puntuali gestiti da Andrea Gamba).
+      Piano di consegna, operazioni post-DNS e **draft completi delle email**
+      ad Antonio (scelta subdomain) e ad Andrea (elenco record) in
+      [`HANDOFF.md`](./HANDOFF.md).
+      Sequenza:
+  1. Email ad **Antonio Sarti Deponti** → scelta subdomain
+     (`educational.*` consigliato) — draft #1 in `HANDOFF.md`
+  2. Email ad **Andrea Gamba** cc Antonio → elenco record DNS
+     (CNAME Pages, CNAME R2, SPF/DKIM/MX Resend) — draft #2 in `HANDOFF.md`
+  3. Post-DNS: 15 min di config lato Pages/R2/Resend
+     — checklist in `HANDOFF.md` Step 4
+  4. Email di handoff finale a **Giulia Vaini** — draft #3 in `HANDOFF.md`
+
   Blocca:
   - Custom domain Cloudflare Pages (ora `*.pages.dev`)
   - Custom domain R2 (ora `pub-*.r2.dev` diretto)
