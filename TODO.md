@@ -9,18 +9,16 @@ cliente) e task post-lancio.
 
 ## 🔴 Blocker esterni (in attesa di terzi)
 
-- [ ] **DNS `uniacque.bg.it`** — Opzione 3 (record puntuali gestiti da Andrea Gamba).
-      Piano di consegna, operazioni post-DNS e **draft completi delle email**
-      ad Antonio (scelta subdomain) e ad Andrea (elenco record) in
-      [`HANDOFF.md`](./HANDOFF.md).
+- [ ] **DNS `uniacque.bg.it`** — Opzione 3 (record puntuali). Subdomain
+      definitivo = `educational.uniacque.bg.it` (continuità con Wix attuale).
+      Piano di consegna + draft email in [`HANDOFF.md`](./HANDOFF.md).
       Sequenza:
-  1. Email ad **Antonio Sarti Deponti** → scelta subdomain
-     (`educational.*` consigliato) — draft #1 in `HANDOFF.md`
-  2. Email ad **Andrea Gamba** cc Antonio → elenco record DNS
-     (CNAME Pages, CNAME R2, SPF/DKIM/MX Resend) — draft #2 in `HANDOFF.md`
-  3. Post-DNS: 15 min di config lato Pages/R2/Resend
-     — checklist in `HANDOFF.md` Step 4
-  4. Email di handoff finale a **Giulia Vaini** — draft #3 in `HANDOFF.md`
+  1. Email ad **Andrea Gamba** cc Antonio Sarti Deponti + Alexandru Cadu +
+     Alex Perez (IMteam) → sostituzione CNAME `educational` (da Wix a
+     Cloudflare Pages) + record opzionali R2/Resend — draft #1 in `HANDOFF.md`
+  2. Post-DNS: 15 min di config lato Pages/R2/Resend
+     — checklist in `HANDOFF.md` Step 3
+  3. Email di handoff finale a **Giulia Vaini** — draft #2 in `HANDOFF.md`
 
   Blocca:
   - Custom domain Cloudflare Pages (ora `*.pages.dev`)

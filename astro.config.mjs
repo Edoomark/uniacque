@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://scuole.uniacque.bg.it',
+  site: 'https://educational.uniacque.bg.it',
   trailingSlash: 'never',
   build: {
     format: 'directory',
