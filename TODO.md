@@ -5,6 +5,11 @@ completato e deployato (commit `ac61a4f`), captcha rimosso, accessibilità
 di base coperta. Rimangono bloccanti esterni (DNS Uniacque, asset grafici
 cliente) e task post-lancio.
 
+> **2026-11-17** — Nessuna risposta ricevuta dal team Uniacque (Andrea Gamba /
+> Antonio Sarti Deponti / IMteam) sulla messa online del sito dopo l'invio
+> del draft #1 di `HANDOFF.md`. Sequenza DNS + custom domain Pages ancora
+> ferma in attesa di riscontro.
+
 ---
 
 ## 🔴 Blocker esterni (in attesa di terzi)
@@ -127,6 +132,25 @@ Dettagli operativi nel README + tutorial in conversazione.
   - `astro.config.mjs` già impostato su quell'URL
   - aggiornare hostname Stream (il subdomain customer `.cloudflarestream.com`
     accetta embed di default, nessuna whitelist richiesta se non abilitata)
+
+---
+
+## Integrazioni CRM
+
+- [x] **CRM Skillherz** — invio parallelo fire-and-forget dal form contatti
+      (commit `fc144c2`, 2026-11-17). Ambiente **test** (`pub_test_*`,
+      `consenso_versione: v1-modulouniacque`). Endpoint:
+      `https://skillherz-crm.sviluppo-4bd.workers.dev/v1/submit`.
+      Verificato live: preflight 204 + POST 200, invio originale a
+      `/api/contact` invariato. Mappa form → payload:
+      `name → "nome e cognome"`, `email → email`,
+      `school → "Istituto Scolastico"`, `message → Messaggio`,
+      campi standard: `sito_web` (honeypot), `campagna: "Modulo Uniacque"`,
+      `pagina`, `utm_*`, `secondi`.
+- [ ] **CRM Skillherz — passaggio a produzione**: sostituire la chiave
+      `pub_test_*` con la chiave live quando il CRM sarà pronto; eventuale
+      aggiornamento `consenso_versione`. Unico file toccato:
+      `src/components/blocks/ContactForm.astro`.
 
 ---
 
