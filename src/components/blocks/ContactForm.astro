@@ -26,6 +26,14 @@ const { id = 'contatti' } = Astro.props;
       method="post"
       novalidate
     >
+      <input
+        type="text"
+        name="sito_web"
+        tabindex="-1"
+        autocomplete="off"
+        class="hidden"
+        aria-hidden="true"
+      />
       <div class="grid gap-4 sm:grid-cols-2">
         <label class="block">
           <span class="text-sm font-medium">Nome e cognome</span>
@@ -88,6 +96,51 @@ const { id = 'contatti' } = Astro.props;
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   const status = document.querySelector<HTMLElement>('[data-contact-status]');
 
+  const formStartedAt = Date.now();
+
+  const CRM_ENDPOINT = 'https://skillherz-crm.sviluppo-4bd.workers.dev/v1/submit';
+  const CRM_PUBLIC_KEY = 'pub_test_GnZKqBCAAFHxXNMzcZTO1lOVZZ4FaVzz';
+  const CRM_CONSENT_VERSION = 'v1-modulouniacque';
+
+  function sendToCRM(formData: FormData) {
+    try {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      const payload = {
+        consenso_versione: CRM_CONSENT_VERSION,
+        consenso_privacy: 'si',
+        sito_web: String(formData.get('sito_web') ?? ''),
+        'nome e cognome': String(formData.get('name') ?? ''),
+        email: String(formData.get('email') ?? ''),
+        'Istituto Scolastico': String(formData.get('school') ?? ''),
+        Messaggio: String(formData.get('message') ?? ''),
+        campagna: 'Modulo Uniacque',
+        pagina: url.pathname + url.search,
+        utm_source: params.get('utm_source') ?? '',
+        utm_medium: params.get('utm_medium') ?? '',
+        utm_campaign: params.get('utm_campaign') ?? '',
+        secondi: Math.round((Date.now() - formStartedAt) / 1000),
+      };
+
+      fetch(CRM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+          'X-CRM-Key': CRM_PUBLIC_KEY,
+        },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      })
+        .then((res) => {
+          if (!res.ok) console.warn('[CRM Skillherz] HTTP', res.status);
+        })
+        .catch((err) => console.warn('[CRM Skillherz] network error', err));
+    } catch (err) {
+      console.warn('[CRM Skillherz] payload error', err);
+    }
+  }
+
   function setStatus(kind: 'ok' | 'err', msg: string) {
     if (!status) return;
     status.textContent = msg;
@@ -100,6 +153,8 @@ const { id = 'contatti' } = Astro.props;
     event.preventDefault();
     const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;
+
+    sendToCRM(new FormData(form));
 
     try {
       const res = await fetch(form.action, {
